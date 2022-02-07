@@ -1,9 +1,4 @@
 .header {
-    background-color: #000;
-    color: #fff;
-    border-bottom: 1px solid #e5e5e5;
-    height: 60px;
-    line-height: 60px;
-    position: relative;
-    z-index: 10;
+    background-color: #b8e1ff;
+    color: white;
 }

@@ -4,19 +4,22 @@ import Header from "./components/Header/header";
 import Sidebar from "./components/Sidebar/sidebar";
 import Dashboard from "./components/Dashboard/dashboard";
 import Goods from "./components/Goods/goods";
+import Sales from "./components/Sales/sales";
+import Users from "./components/Users/users";
 
 function App() {
     return (
         <Router>
             <div className="App">
-                <Header />
-                <div>
+                <main>
                     <Sidebar />
                     <Routes>
-                    <Route exact path="/goods" element={<Goods />} />
                         <Route exact path="/" element={<Dashboard />} />
+                        <Route path="/goods" element={<Goods />} />
+                        <Route path="/sales" element={<Sales />} />
+                        <Route path="/users" element={<Users />} />
                     </Routes>
-                </div>
+                </main>
             </div>
         </Router>
     );

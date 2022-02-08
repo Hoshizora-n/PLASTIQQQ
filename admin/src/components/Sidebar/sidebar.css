@@ -1,0 +1,31 @@
+aside {
+    height: 100vh;
+    background-color: gray;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+aside ul {
+    margin-top: 10px;
+}
+
+aside ul > * {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    padding: 0 15px;
+}
+
+aside ul > *:hover {
+    background-color: #b8e1ff;
+}
+
+aside > .logout > * {
+    text-decoration: none;
+    color: white;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}

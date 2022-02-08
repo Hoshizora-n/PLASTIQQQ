@@ -13,9 +13,17 @@ const con = mysql.createConnection({
 con.connect(function (err) {
     if (err) throw err;
     console.log("Connected!");
-    con.query("SELECT * FROM `admin`", function (err, result) {
+});
+
+// con.query("SELECT * FROM `admin`", function (err, result) {
+//     if (err) throw err;
+//     console.log(JSON.stringify(result));
+// });
+
+app.get("/admin", (req, res) => {
+    con.query("SELECT * FROM `admin` WHERE username = 'admin'", function (err, result) {
         if (err) throw err;
-        console.log(JSON.stringify(result));
+        res.send(JSON.stringify(result));
     });
 });
 

@@ -3,10 +3,6 @@ import "./login.css";
 
 function Login() {
 
-    const handleSubmitForm = (e) => {
-        e.preventDefault();
-    }
-
     const handleUsernameArrowDown = (e) => {
         e.preventDefault();
         if (e.key === 'ArrowDown') {
@@ -23,20 +19,9 @@ function Login() {
         }
     }
 
-    const handleClick = (e) => {
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
-        if (username === 'admin' && password === 'admin') {
-            window.location.href = '/dashboard';
-        } else {
-            e.preventDefault();
-            console.log('Wrong username or password');
-        }
-    }
-
     return (
         <div className="login">
-            <form onSubmit={ handleSubmitForm }>
+            <form action="http://localhost:3100/admin" method="POST">
                 <h1>Login</h1>
                 <div className="inputForm">
                     <div className="usernameInput" >
@@ -48,7 +33,7 @@ function Login() {
                         <input type="text" id="password" name="password" onKeyUp={ handlePasswordArrowDown }></input>
                     </div>
                 </div>
-                <button id="submit" onClick={ handleClick }>Login</button>
+                <button id="submit">Login</button>
             </form>
         </div>
     );

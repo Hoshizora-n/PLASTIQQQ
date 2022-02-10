@@ -25,10 +25,12 @@
 
 .login > form > .inputForm > * > input {
     width: 100%;
+    transition: all 0.3s;
 }
 
 .login > form > .inputForm > *:focus-within > label {
     color: lightblue;
+    transition: color 0.1s;
 }
 
 .login > form > .inputForm > *:focus-within > input {

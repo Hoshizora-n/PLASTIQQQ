@@ -7,7 +7,7 @@ function Login() {
         e.preventDefault();
     }
 
-    const handleUsernameEnter = (e) => {
+    const handleUsernameArrowDown = (e) => {
         e.preventDefault();
         if (e.key === 'ArrowDown') {
             document.getElementById('password').focus();
@@ -15,7 +15,7 @@ function Login() {
         }
     }
 
-    const handlePasswordEnter = (e) => {
+    const handlePasswordArrowDown = (e) => {
         e.preventDefault()
         if (e.key === 'ArrowDown') {
             document.getElementById('submit').focus();
@@ -41,11 +41,11 @@ function Login() {
                 <div className="inputForm">
                     <div className="usernameInput" >
                         <label htmlFor="username">Username : </label>
-                        <input type="text" id="username" name="username" onKeyUp={ handleUsernameEnter } />
+                        <input type="text" id="username" name="username" onKeyUp={ handleUsernameArrowDown } />
                     </div>
                     <div className="passwordInput" >
                         <label htmlFor="password">Password : </label>
-                        <input type="text" id="password" name="password" onKeyUp={ handlePasswordEnter }></input>
+                        <input type="text" id="password" name="password" onKeyUp={ handlePasswordArrowDown }></input>
                     </div>
                 </div>
                 <button id="submit" onClick={ handleClick }>Login</button>

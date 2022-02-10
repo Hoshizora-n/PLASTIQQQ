@@ -1,5 +1,6 @@
 const express = require("express");
 const mysql = require("mysql");
+const cors = require("cors");
 
 const app = express();
 
@@ -12,14 +13,14 @@ const con = mysql.createConnection({
 
 con.connect(function (err) {
     if (err) throw err;
-    console.log("Connected!");
+    else console.log("Connected!");
 });
 
 app.get("/admin", (req, res) => {
-    const data = con.query("SELECT * FROM `admin` WHERE username = 'admin'", function (err, result) {
+    const data = con.query("SELECT * FROM `admin`", function (err, result) {
         if (err) throw err;
         else {
-            res.send(result);
+            res.status(200).send(result);
         }
     });
 });

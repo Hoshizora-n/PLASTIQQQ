@@ -1,5 +1,7 @@
+import React from "react";
 import "./App.css";
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import Login from "./components/Login/login";
 import Header from "./components/Header/header";
 import Sidebar from "./components/Sidebar/sidebar";
 import Dashboard from "./components/Dashboard/dashboard";
@@ -9,19 +11,20 @@ import Users from "./components/Users/users";
 
 function App() {
     return (
-        <Router>
-            <div className="App">
-                <main>
-                    <Sidebar />
+        <div className="App">
+            <Login/>
+            {/* <main>
+                <Router>
+                    <Sidebar/>
                     <Routes>
-                        <Route exact path="/" element={<Dashboard />} />
-                        <Route path="/goods" element={<Goods />} />
-                        <Route path="/sales" element={<Sales />} />
-                        <Route path="/users" element={<Users />} />
+                        <Route path="/" element={<Dashboard/>} />
+                        <Route path="/goods" element={<Goods/>} />
+                        <Route path="/sales" element={<Sales/>} />
+                        <Route path="/users" element={<Users/>} />
                     </Routes>
-                </main>
-            </div>
-        </Router>
+                </Router>
+            </main> */}
+        </div>
     );
 }
 

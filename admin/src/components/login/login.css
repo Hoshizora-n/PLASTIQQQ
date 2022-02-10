@@ -55,3 +55,7 @@
 .login > form > button:hover {
     background-color: lightblue;
 }
+
+.login > form > button:focus {
+    background-color: lightblue;
+}

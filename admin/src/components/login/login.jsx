@@ -1,7 +1,26 @@
 import React from "react";
 import "./login.css";
+import axios from "axios";
+// import formData from "form-data";
 
 function Login() {
+    // const data = new formData();
+    // data.append("username", "admin");
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+        const data = {
+            username: username,
+            password: password
+        };
+
+        axios.post("http://localhost:3100/admin", data)
+        .then(res => {
+            console.log(res);
+        });
+    }
 
     const handleUsernameArrowDown = (e) => {
         e.preventDefault();
@@ -21,7 +40,7 @@ function Login() {
 
     return (
         <div className="login">
-            <form action="http://localhost:3100/admin" method="POST">
+            <form method="POST" onSubmit={ handleSubmit }>
                 <h1>Login</h1>
                 <div className="inputForm">
                     <div className="usernameInput" >
@@ -33,7 +52,7 @@ function Login() {
                         <input type="text" id="password" name="password" onKeyUp={ handlePasswordArrowDown }></input>
                     </div>
                 </div>
-                <button id="submit">Login</button>
+                <button type="submit" id="submit">Login</button>
             </form>
         </div>
     );

@@ -19,13 +19,6 @@ con.connect(function (err) {
     else console.log("Connected!");
 });
 
-app.get("/admin", (req, res) => {
-    con.query("SELECT * FROM `admin`", function (err, result) {
-        if (err) throw err;
-        else res.status(200).send(result);
-    });
-});
-
 app.post("/admin", (req, res) => {
     const { username, password } = req.body;
 

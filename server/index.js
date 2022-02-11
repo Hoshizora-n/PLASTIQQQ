@@ -20,17 +20,33 @@ con.connect(function (err) {
 });
 
 app.get("/admin", (req, res) => {
-    const data = con.query("SELECT * FROM `admin`", function (err, result) {
+    con.query("SELECT * FROM `admin`", function (err, result) {
         if (err) throw err;
-        else {
-            res.status(200).send(result);
-        }
+        else res.status(200).send(result);
     });
 });
 
 app.post("/admin", (req, res) => {
-    console.log(req.body);
-    res.sendStatus(200);
+    const { username, password } = req.body;
+
+    const auth = con.query("SELECT * FROM `admin` WHERE username = ?", [username], function (err, result) {
+        if (err) throw err;
+        else {
+            const data = result[0];
+            if (data) {
+                if (data.password === password) {
+                    res.status(200).send({
+                        message: "Login Success",
+                        data: data,
+                    });
+                } else {
+                    res.status(200).send({ message: "Wrong Password" });
+                }
+            } else {
+                res.status(200).send({ message: "Username not found" });
+            }
+        }
+    });
 });
 
 app.listen(3100, () => console.log("Server started on port 3100"));

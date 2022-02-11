@@ -18,8 +18,11 @@ function Login() {
 
         axios.post("http://localhost:3100/admin", data)
         .then(res => {
-            console.log(res);
-        });
+            alert(res.data.message);
+        })
+        .catch(err => {
+            alert(err);
+        })
     }
 
     const handleUsernameArrowDown = (e) => {

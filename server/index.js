@@ -22,7 +22,7 @@ con.connect(function (err) {
 app.post("/admin", (req, res) => {
     const { username, password } = req.body;
 
-    const auth = con.query("SELECT * FROM `admin` WHERE username = ?", [username], function (err, result) {
+    con.query("SELECT * FROM `admin` WHERE username = ?", [username], function (err, result) {
         if (err) throw err;
         else {
             const data = result[0];

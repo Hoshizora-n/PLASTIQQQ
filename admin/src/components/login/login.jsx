@@ -1,11 +1,8 @@
 import React from "react";
 import "./login.css";
 import axios from "axios";
-// import formData from "form-data";
 
 function Login() {
-    // const data = new formData();
-    // data.append("username", "admin");
 
     const handleSubmit = (e) => {
         e.preventDefault()

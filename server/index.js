@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
-const db = require("./db.js");
+const db = require("./db");
 
 const app = express();
 
@@ -11,16 +11,26 @@ app.use(express.urlencoded({ extended: true }));
 
 app.post("/admin", (req, res) => {
     const { username, password } = req.body;
-
     db.query("SELECT * FROM `admin` WHERE username = ?", [username], function (err, result) {
         if (err) throw err;
         else {
             const data = result[0];
             if (data) {
                 if (data.password === password) {
+                    let token = jwt.sign(
+                        {
+                            username,
+                            password,
+                        },
+                        "secret"
+                    );
+
+                    // decode jwt token
+                    // console.log(jwt.verify(token, "secret"));
+
                     res.status(200).send({
                         message: "Login Success",
-                        data: data,
+                        token,
                     });
                 } else {
                     res.status(200).send({ message: "Wrong Password" });
@@ -30,6 +40,33 @@ app.post("/admin", (req, res) => {
             }
         }
     });
+});
+
+app.post("/admin/checkToken", (req, res) => {
+    const token = req.body.token;
+    let decoded;
+    try {
+        decoded = jwt.verify(token, "secret");
+    } catch (error) {
+        decoded = error;
+    }
+    db.query(
+        "SELECT * FROM `admin` WHERE username = ? AND password = ?",
+        [decoded.username, decoded.password],
+        function (err, result) {
+            if (err) throw err;
+            else {
+                const data = result[0];
+                if (data) {
+                    res.status(200).send({
+                        message: "Token Valid",
+                    });
+                } else {
+                    res.status(200).send({ message: "Token not valid" });
+                }
+            }
+        }
+    );
 });
 
 app.listen(3100, () => console.log("Server started on port 3100"));

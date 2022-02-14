@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import "./sidebar.css";
 
-function Sidebar() {
+const Sidebar = ({logout}) => {
   return <aside>
     <nav>
       <ul>
@@ -13,7 +13,7 @@ function Sidebar() {
       </ul>
     </nav>
     <div className='logout'>
-      <Link to={'#'}>Logout</Link>
+      <button onClick={logout}>Logout</button>
     </div>
   </aside>;
 }

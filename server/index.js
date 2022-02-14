@@ -25,9 +25,6 @@ app.post("/admin", (req, res) => {
                         "secret"
                     );
 
-                    // decode jwt token
-                    // console.log(jwt.verify(token, "secret"));
-
                     res.status(200).send({
                         message: "Login Success",
                         token,

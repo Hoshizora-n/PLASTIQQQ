@@ -11,8 +11,7 @@ import Users from "./components/Users/users";
 
 function GetToken() {
     if (!localStorage.getItem("token")) return <Login />;
-
-    return TokenValidation();
+    else return <TokenValidation />;
 }
 
 function TokenValidation() {

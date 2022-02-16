@@ -18,6 +18,7 @@ function GetToken() {
 function TokenValidation() {
     const [tokenValid, setTokenValid] = useState(false);
     useEffect(() => {
+        // setTimeout(() => {
         axios
             .post("http://localhost:3100/admin/checkToken", {
                 token: localStorage.getItem("token"),
@@ -26,6 +27,7 @@ function TokenValidation() {
                 setTokenValid(res.data.message);
             })
             .catch((err) => console.log(err));
+        // }, 0);
     }, []);
 
     if (tokenValid === false) return <Loading />;

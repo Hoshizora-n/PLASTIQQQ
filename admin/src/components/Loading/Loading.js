@@ -1,7 +1,13 @@
 import React from "react";
+import "./loading.css";
 
 function Loading() {
-    return <div>Loading...</div>;
+    return (
+        <div className="loadingContainer">
+            <div className="loading"></div>
+            <div>Authenticating</div>
+        </div>
+    );
 }
 
 export default Loading;

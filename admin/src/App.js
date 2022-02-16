@@ -16,23 +16,28 @@ function GetToken() {
 }
 
 function TokenValidation() {
-    const [tokenValid, setTokenValid] = useState(false);
-    useEffect(() => {
-        // setTimeout(() => {
-        axios
-            .post("http://localhost:3100/admin/checkToken", {
-                token: localStorage.getItem("token"),
-            })
-            .then((res) => {
-                setTokenValid(res.data.message);
-            })
-            .catch((err) => console.log(err));
-        // }, 1000);
-    }, []);
+    const [tokenValid, setTokenValid] = useState();
+    const [username, setUsername] = useState();
 
-    if (tokenValid === false) return <Loading />;
-    if (tokenValid === "Token Valid") return <App />;
-    else return <Login />;
+    // useEffect(() => {
+    //     setTimeout(() => {
+    //         axios
+    //             .post("http://localhost:3100/admin/checkToken", {
+    //                 token: localStorage.getItem("token"),
+    //             })
+    //             .then((res) => {
+    //                 setUsername(res.data.username);
+    //                 setTokenValid(res.data.message);
+    //             })
+    //             .catch((err) => console.log(err));
+    //     }, 5000);
+    // }, []);
+
+    if (tokenValid === undefined) return <Loading />;
+    if (tokenValid === "Token Valid") {
+        console.log(username);
+        return <App />;
+    } else return <Login />;
 }
 
 function App() {

@@ -57,6 +57,7 @@ app.post("/admin/checkToken", (req, res) => {
                 if (data) {
                     res.status(200).send({
                         message: "Token Valid",
+                        username: decoded.username,
                     });
                 } else {
                     res.status(200).send({ message: "Token not valid" });

@@ -2,8 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./sidebar.css";
 
-const Sidebar = ({ logout }) => {
-    console.log("hello from sidebar");
+const Sidebar = () => {
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        window.location.href = "/";
+    };
     return (
         <aside>
             <nav>
@@ -15,7 +18,7 @@ const Sidebar = ({ logout }) => {
                 </ul>
             </nav>
             <div className="logout">
-                <button onClick={logout}>Logout</button>
+                <button onClick={handleLogout}>Logout</button>
             </div>
         </aside>
     );

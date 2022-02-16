@@ -16,19 +16,19 @@ function GetToken() {
 }
 
 function TokenValidation() {
-    const [auth, setAuth] = useState();
+    const [tokenValid, setTokenValid] = useState();
     useEffect(() => {
         axios
             .post("http://localhost:3100/admin/checkToken", {
                 token: localStorage.getItem("token"),
             })
             .then((res) => {
-                setAuth(res.data.message);
+                setTokenValid(res.data.message);
             })
             .catch((err) => console.log(err));
     }, []);
 
-    if (auth === "Token Valid") return <App />;
+    if (tokenValid === "Token Valid") return <App />;
     else return <Login />;
 }
 

@@ -22,10 +22,19 @@ aside ul > *:hover {
     background-color: #b8e1ff;
 }
 
-aside > .logout > * {
-    text-decoration: none;
+aside > .logout > button {
+    text-align: start;
+    padding-left: 15px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background: none;
+    width: 100%;
+    margin-bottom: 15px;
     color: white;
-    display: flex;
-    justify-content: center;
-    margin-bottom: 10px;
+    font-size: 1em;
+}
+
+aside > .logout > button:hover {
+    background-color: #b8e1ff;
 }

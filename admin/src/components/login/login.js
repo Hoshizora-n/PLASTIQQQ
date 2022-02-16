@@ -1,19 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import "./login.css";
 import axios from "axios";
 
 const Login = () => {
+    const [username, setUsername] = useState();
+    const [password, setPassword] = useState();
+
+    const handleUsernameChange = (e) => {
+        setUsername(e.target.value);
+    };
+
+    const handlePasswordChange = (e) => {
+        setPassword(e.target.value);
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        const username = document.getElementById("username").value;
-        const password = document.getElementById("password").value;
         const data = {
             username: username,
             password: password,
         };
 
+        console.log(data);
+
         axios
-            .post("http://localhost:3100/admin", data)
+            .post("http://192.168.0.106:3100/admin", data)
             .then((res) => {
                 if (res.data.message === "Login Success") {
                     localStorage.setItem("token", res.data.token);
@@ -51,11 +62,23 @@ const Login = () => {
                 <div className="inputForm">
                     <div className="usernameInput">
                         <label htmlFor="username">Username : </label>
-                        <input type="text" id="username" name="username" onKeyUp={handleUsernameArrowDown} />
+                        <input
+                            type="text"
+                            id="username"
+                            name="username"
+                            onChange={handleUsernameChange}
+                            onKeyUp={handleUsernameArrowDown}
+                        />
                     </div>
                     <div className="passwordInput">
                         <label htmlFor="password">Password : </label>
-                        <input type="text" id="password" name="password" onKeyUp={handlePasswordArrowDown}></input>
+                        <input
+                            type="text"
+                            id="password"
+                            name="password"
+                            onChange={handlePasswordChange}
+                            onKeyUp={handlePasswordArrowDown}
+                        ></input>
                     </div>
                 </div>
                 <button type="submit" id="submit">

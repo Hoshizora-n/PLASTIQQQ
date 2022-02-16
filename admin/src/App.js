@@ -19,19 +19,19 @@ function TokenValidation() {
     const [tokenValid, setTokenValid] = useState();
     const [username, setUsername] = useState();
 
-    // useEffect(() => {
-    //     setTimeout(() => {
-    //         axios
-    //             .post("http://localhost:3100/admin/checkToken", {
-    //                 token: localStorage.getItem("token"),
-    //             })
-    //             .then((res) => {
-    //                 setUsername(res.data.username);
-    //                 setTokenValid(res.data.message);
-    //             })
-    //             .catch((err) => console.log(err));
-    //     }, 5000);
-    // }, []);
+    useEffect(() => {
+        setTimeout(() => {
+            axios
+                .post("http://localhost:3100/admin/checkToken", {
+                    token: localStorage.getItem("token"),
+                })
+                .then((res) => {
+                    setUsername(res.data.username);
+                    setTokenValid(res.data.message);
+                })
+                .catch((err) => console.log(err));
+        }, 1000);
+    }, []);
 
     if (tokenValid === undefined) return <Loading />;
     if (tokenValid === "Token Valid") {

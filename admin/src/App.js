@@ -8,6 +8,7 @@ import Dashboard from "./components/Dashboard/dashboard";
 import Goods from "./components/Goods/goods";
 import Sales from "./components/Sales/sales";
 import Users from "./components/Users/users";
+import Loading from "./components/Loading/Loading";
 
 function GetToken() {
     if (!localStorage.getItem("token")) return <Login />;
@@ -15,7 +16,7 @@ function GetToken() {
 }
 
 function TokenValidation() {
-    const [tokenValid, setTokenValid] = useState();
+    const [tokenValid, setTokenValid] = useState(false);
     useEffect(() => {
         axios
             .post("http://localhost:3100/admin/checkToken", {
@@ -27,6 +28,7 @@ function TokenValidation() {
             .catch((err) => console.log(err));
     }, []);
 
+    if (tokenValid === false) return <Loading />;
     if (tokenValid === "Token Valid") return <App />;
     else return <Login />;
 }

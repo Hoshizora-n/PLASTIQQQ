@@ -27,7 +27,7 @@ function TokenValidation() {
                 setTokenValid(res.data.message);
             })
             .catch((err) => console.log(err));
-        // }, 0);
+        // }, 1000);
     }, []);
 
     if (tokenValid === false) return <Loading />;

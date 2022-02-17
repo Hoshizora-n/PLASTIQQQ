@@ -13,12 +13,17 @@ aside ul {
 aside ul > * {
     text-decoration: none;
     display: flex;
-    flex-direction: column;
+    align-items: center;
     padding: 0 15px;
+    color: black;
 }
 
 aside ul > *:hover {
-    color: #5584c5;
+    color: var(--color-highlight);
+}
+
+aside ul > * > * {
+    margin-right: 10px;
 }
 
 aside > .logout > button {
@@ -31,8 +36,14 @@ aside > .logout > button {
     width: 100%;
     margin-bottom: 15px;
     font-size: 1em;
+    display: flex;
+    align-items: center;
 }
 
 aside > .logout > button:hover {
-    color: #5584c5;
+    color: var(--color-highlight);
+}
+
+aside > .logout > button > * {
+    margin-right: 10px;
 }

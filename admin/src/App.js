@@ -34,6 +34,7 @@ function TokenValidation() {
                 })
                 .catch((err) => console.log(err));
         }, 1000);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     if (tokenValid === undefined) return <Loading />;

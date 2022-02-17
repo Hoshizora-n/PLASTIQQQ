@@ -3,6 +3,7 @@ aside {
     background-color: white;
     display: flex;
     flex-direction: column;
+    position: fixed;
 }
 
 aside > .sidebar-header {
@@ -37,6 +38,10 @@ aside ul > * {
     color: black;
 }
 
+aside ul > *#active {
+    color: var(--color-highlight);
+}
+
 aside ul > *:hover {
     color: var(--color-highlight);
 }
@@ -65,4 +70,10 @@ aside > .logout > button:hover {
 
 aside > .logout > button > * {
     margin-right: 10px;
+}
+
+@media only screen and (max-width: 600px) {
+    aside {
+        flex-direction: column;
+    }
 }

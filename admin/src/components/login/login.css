@@ -28,14 +28,14 @@
 }
 
 .login > form > .inputForm > *:focus-within > label {
-    color: lightblue;
+    color: #5584c5;
     transition: color 0.1s;
 }
 
 .login > form > .inputForm > *:focus-within > input {
     outline: none;
     border-radius: 3px;
-    border: 3px solid lightblue;
+    border: 3px solid var(--color-highlight);
 }
 
 .login > form > .inputForm > .usernameInput > input {
@@ -52,9 +52,11 @@
 }
 
 .login > form > button:hover {
-    background-color: lightblue;
+    background-color: var(--color-highlight);
 }
 
 .login > form > button:focus {
-    background-color: lightblue;
+    border: none;
+    outline: #5584c5;
+    background-color: #5584c5;
 }

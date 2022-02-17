@@ -21,14 +21,11 @@ const Login = () => {
             password: password,
         };
 
-        console.log(data);
-
         axios
             .post("http://192.168.0.106:3100/admin", data)
             .then((res) => {
                 if (res.data.message === "Login Success") {
                     localStorage.setItem("token", res.data.token);
-                    alert(res.data.message);
                     window.location.href = "/";
                 } else {
                     alert(res.data.message);

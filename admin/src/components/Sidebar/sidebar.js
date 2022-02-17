@@ -11,7 +11,7 @@ const Sidebar = () => {
         <aside>
             <nav>
                 <ul>
-                    <Link to={"/"}>Dashboard</Link>
+                    <Link to={"/dashboard"}>Dashboard</Link>
                     <Link to={"/goods"}>Goods</Link>
                     <Link to={"/sales"}>Sales</Link>
                     <Link to={"/users"}>Users</Link>

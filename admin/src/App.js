@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Login from "./components/Login/login";
 import Sidebar from "./components/Sidebar/sidebar";
+import Header from "./components/Header/header";
 import Dashboard from "./components/Dashboard/dashboard";
 import Goods from "./components/Goods/goods";
 import Sales from "./components/Sales/sales";
@@ -18,11 +19,13 @@ function GetToken() {
 function TokenValidation() {
     const [tokenValid, setTokenValid] = useState();
     const [username, setUsername] = useState();
+    let navigate = useNavigate();
 
     useEffect(() => {
+        navigate("/dashboard");
         setTimeout(() => {
             axios
-                .post("http://localhost:3100/admin/checkToken", {
+                .post("http://192.168.0.106:3100/admin/checkToken", {
                     token: localStorage.getItem("token"),
                 })
                 .then((res) => {
@@ -44,12 +47,17 @@ function App() {
     return (
         <div className="App">
             <Sidebar />
-            <Routes>
-                <Route path="/" element={<Dashboard />} />
-                <Route path="/goods" element={<Goods />} />
-                <Route path="/sales" element={<Sales />} />
-                <Route path="/users" element={<Users />} />
-            </Routes>
+            <div>
+                <Routes>
+                    <Route path="/:page" element={<Header />} />
+                </Routes>
+                <Routes>
+                    <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="/goods" element={<Goods />} />
+                    <Route path="/sales" element={<Sales />} />
+                    <Route path="/users" element={<Users />} />
+                </Routes>
+            </div>
         </div>
     );
 }

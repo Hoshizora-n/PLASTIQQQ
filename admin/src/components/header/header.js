@@ -1,12 +1,14 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 import "./header.css";
 
-function header() {
+function Header() {
+    let { page } = useParams();
     return (
         <div className="header">
-            <h1>Plastiqqq.</h1>
+            <h1>Page: {page}</h1>
         </div>
     );
 }
 
-export default header;
+export default Header;

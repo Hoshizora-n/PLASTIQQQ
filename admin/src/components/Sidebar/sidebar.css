@@ -1,6 +1,6 @@
 aside {
     height: 100vh;
-    background-color: gray;
+    background-color: white;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -11,7 +11,6 @@ aside ul {
 }
 
 aside ul > * {
-    color: white;
     text-decoration: none;
     display: flex;
     flex-direction: column;
@@ -19,7 +18,7 @@ aside ul > * {
 }
 
 aside ul > *:hover {
-    background-color: #b8e1ff;
+    color: #5584c5;
 }
 
 aside > .logout > button {
@@ -31,10 +30,9 @@ aside > .logout > button {
     background: none;
     width: 100%;
     margin-bottom: 15px;
-    color: white;
     font-size: 1em;
 }
 
 aside > .logout > button:hover {
-    background-color: #b8e1ff;
+    color: #5584c5;
 }

@@ -13,6 +13,9 @@ const Sidebar = () => {
     };
     return (
         <aside>
+            <div className="sidebar-header">
+                <Link to="#">PLASTIQQQ.</Link>
+            </div>
             <nav>
                 <ul>
                     <Link to={"/dashboard"}>

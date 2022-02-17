@@ -3,7 +3,25 @@ aside {
     background-color: white;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+}
+
+aside > .sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+aside > .sidebar-header > * {
+    text-decoration: none;
+    color: black;
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0 15px;
+    border-bottom: 1px solid var(--color-highlight);
+}
+
+aside > nav {
+    flex-grow: 1;
 }
 
 aside ul {

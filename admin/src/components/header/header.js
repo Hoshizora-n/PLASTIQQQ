@@ -4,6 +4,7 @@ import "./header.css";
 
 function Header() {
     let { page } = useParams();
+    page = page.slice(0, 1).toUpperCase() + page.slice(1);
     return (
         <div className="header">
             <h1>Page: {page}</h1>

@@ -11,12 +11,12 @@ import Sales from "./components/Sales/sales";
 import Users from "./components/Users/users";
 import Loading from "./components/Loading/Loading";
 
-function GetToken() {
+const GetToken = () => {
     if (!localStorage.getItem("token")) return <Login />;
     else return <TokenValidation />;
-}
+};
 
-function TokenValidation() {
+const TokenValidation = () => {
     const [tokenValid, setTokenValid] = useState();
     const [username, setUsername] = useState();
     let navigate = useNavigate();
@@ -42,9 +42,9 @@ function TokenValidation() {
         console.log(username);
         return <App />;
     } else return <Login />;
-}
+};
 
-function App() {
+const App = () => {
     return (
         <div className="App">
             <Sidebar />
@@ -61,6 +61,6 @@ function App() {
             </div>
         </div>
     );
-}
+};
 
 export default GetToken;

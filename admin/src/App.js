@@ -38,27 +38,23 @@ const TokenValidation = () => {
     }, []);
 
     if (tokenValid === undefined) return <Loading />;
-    if (tokenValid === "Token Valid") {
-        console.log(username);
-        return <App />;
-    } else return <Login />;
+    if (tokenValid === "Token Valid") return <App username={username} />;
+    else return <Login />;
 };
 
-const App = () => {
+const App = (props) => {
     return (
         <div className="App">
             <Sidebar />
-            <div>
-                <Routes>
-                    <Route path="/:page" element={<Header />} />
-                </Routes>
+            <main>
+                <Header username={props.username} />
                 <Routes>
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/goods" element={<Goods />} />
                     <Route path="/sales" element={<Sales />} />
                     <Route path="/users" element={<Users />} />
                 </Routes>
-            </div>
+            </main>
         </div>
     );
 };

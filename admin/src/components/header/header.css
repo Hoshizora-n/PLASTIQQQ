@@ -1,3 +1,45 @@
 .header {
     color: white;
+    display: flex;
+}
+
+.header > :first-child {
+    flex-grow: 1;
+}
+
+.header > .menu-bar-container {
+    display: none;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.header > .menu-bar-container > .menu-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.header > .menu-bar-container > .menu-bar > span {
+    margin: 0 5px;
+    background-color: black;
+    border: 2px solid black;
+    width: 25px;
+    margin-top: 5px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.header > .menu-bar-container > .menu-bar > :first-child.open {
+    transform: translateY(9px);
+}
+
+.header > .menu-bar-container > .menu-bar > :last-child.open {
+    transform: translateY(-9px);
+}
+
+@media screen and (max-width: 600px) {
+    .header > .menu-bar-container {
+        display: flex;
+    }
 }

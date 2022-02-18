@@ -13,7 +13,7 @@ const Sidebar = () => {
     };
     return (
         <div className="sidebar">
-            <aside>
+            <aside id="menuOpen">
                 <div className="sidebar-header">
                     <Link to="#">PLASTIQQQ.</Link>
                 </div>

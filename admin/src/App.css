@@ -11,12 +11,4 @@
     .App > main {
         margin: 0 5px;
     }
-
-    .App > :first-child > aside {
-        visibility: collapse;
-    }
-
-    .App > :first-child > aside#menuOpen {
-        visibility: visible;
-    }
 }

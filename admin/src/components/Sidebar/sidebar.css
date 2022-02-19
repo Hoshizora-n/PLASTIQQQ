@@ -74,6 +74,10 @@ aside > .logout > button > * {
 
 @media only screen and (max-width: 600px) {
     aside {
-        flex-direction: column;
+        visibility: collapse;
+    }
+
+    aside#menuOpen {
+        visibility: visible;
     }
 }

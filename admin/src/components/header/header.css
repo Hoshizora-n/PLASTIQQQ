@@ -3,8 +3,27 @@
     display: flex;
 }
 
-.header > :first-child {
+.header > h1 {
     flex-grow: 1;
+    display: flex;
+    align-items: center;
+}
+
+.header > .user-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header > .user-icon > :first-child {
+    cursor: pointer;
+    background-color: black;
+    padding: 7.5px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    color: var(--color-highlight);
+    margin: 5px;
 }
 
 .header > .menu-bar-container {
@@ -39,6 +58,13 @@
 }
 
 @media screen and (max-width: 600px) {
+    .header {
+        padding: 5px;
+        width: 100vw;
+        position: fixed;
+        background-color: var(--color-bg);
+    }
+
     .header > .menu-bar-container {
         display: flex;
     }

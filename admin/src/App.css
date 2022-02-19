@@ -9,6 +9,10 @@
 
 @media screen and (max-width: 600px) {
     .App > main {
-        margin: 0 5px;
+        margin: 0;
+    }
+
+    .App > main > :last-child {
+        margin: 55px 5px 5px 5px;
     }
 }

@@ -76,6 +76,7 @@ aside > .logout > button > * {
 @media only screen and (max-width: 600px) {
     aside {
         left: -100%;
+        z-index: 1;
     }
 
     aside#menuOpen {

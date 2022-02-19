@@ -9,7 +9,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.post("/admin", (req, res) => {
+app.post("/admin/login", (req, res) => {
     const { username, password } = req.body;
     db.query("SELECT * FROM `admin` WHERE username = ?", [username], function (err, result) {
         if (err) throw err;
@@ -50,7 +50,7 @@ app.post("/admin/checkToken", (req, res) => {
     db.query(
         "SELECT * FROM `admin` WHERE username = ? AND password = ?",
         [decoded.username, decoded.password],
-        function (err, result) {
+        (err, result) => {
             if (err) throw err;
             else {
                 const data = result[0];

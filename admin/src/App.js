@@ -29,7 +29,9 @@ const TokenValidation = () => {
                     token: localStorage.getItem("token"),
                 })
                 .then((res) => {
-                    setUsername(res.data.username);
+                    let username = res.data.username;
+                    username = username.slice(0, 1).toUpperCase() + username.slice(1);
+                    setUsername(username);
                     setTokenValid(res.data.message);
                 })
                 .catch((err) => console.log(err));

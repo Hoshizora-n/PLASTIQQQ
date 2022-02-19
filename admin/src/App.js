@@ -43,11 +43,12 @@ const TokenValidation = () => {
 };
 
 const App = (props) => {
+    const [isHeaderOpen, setIsHeaderOpen] = useState(false);
     return (
         <div className="App">
-            <Sidebar />
+            <Sidebar isHeaderOpen={isHeaderOpen} />
             <main>
-                <Header username={props.username} />
+                <Header onToggle={setIsHeaderOpen} username={props.username} />
                 <Routes>
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/goods" element={<Goods />} />

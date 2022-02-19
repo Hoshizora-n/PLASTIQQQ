@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./header.css";
 
 const Header = (props) => {
@@ -7,6 +7,10 @@ const Header = (props) => {
     const menuOpen = () => {
         setIsOpen(!isOpen);
     };
+
+    useEffect(() => {
+        isOpen ? props.onToggle(true) : props.onToggle(false);
+    }, [isOpen]);
 
     return (
         <div className="header">

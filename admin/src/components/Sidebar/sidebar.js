@@ -6,14 +6,14 @@ import { FiPackage, FiUsers } from "react-icons/fi";
 import { IoMdCart } from "react-icons/io";
 import { RiLogoutBoxLine } from "react-icons/ri";
 
-const Sidebar = () => {
+const Sidebar = (props) => {
     const handleLogout = () => {
         localStorage.removeItem("token");
         window.location.href = "/";
     };
     return (
         <div className="sidebar">
-            <aside id="menuOpen">
+            <aside id={props.isHeaderOpen ? "menuOpen" : ""}>
                 <div className="sidebar-header">
                     <Link to="#">PLASTIQQQ.</Link>
                 </div>

@@ -1,5 +1,5 @@
 .header {
-    color: white;
+    color: var(--color-highlight);
     display: flex;
 }
 

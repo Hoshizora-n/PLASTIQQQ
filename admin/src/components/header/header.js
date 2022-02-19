@@ -1,16 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./header.css";
 
 const Header = (props) => {
     let [isOpen, setIsOpen] = useState(false);
 
     const menuOpen = () => {
+        props.onToggle(!isOpen);
         setIsOpen(!isOpen);
     };
-
-    useEffect(() => {
-        isOpen ? props.onToggle(true) : props.onToggle(false);
-    }, [isOpen]);
 
     return (
         <div className="header">

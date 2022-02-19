@@ -4,6 +4,7 @@ aside {
     display: flex;
     flex-direction: column;
     position: fixed;
+    transition: left 0.3s ease-in-out;
 }
 
 aside > .sidebar-header {
@@ -74,10 +75,10 @@ aside > .logout > button > * {
 
 @media only screen and (max-width: 600px) {
     aside {
-        visibility: collapse;
+        left: -100%;
     }
 
     aside#menuOpen {
-        visibility: visible;
+        left: 0;
     }
 }

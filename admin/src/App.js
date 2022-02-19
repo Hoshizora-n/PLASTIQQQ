@@ -13,7 +13,7 @@ import Loading from "./components/Loading/Loading";
 
 const GetToken = () => {
     if (!localStorage.getItem("token")) return <Login />;
-    else return <TokenValidation />;
+    else return TokenValidation();
 };
 
 const TokenValidation = () => {

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./header.css";
 import { FiUser } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 const Header = (props) => {
     let [isOpen, setIsOpen] = useState(false);
@@ -12,9 +13,11 @@ const Header = (props) => {
 
     return (
         <div className="header">
-            <h1> Hello, {props.username}</h1>
+            <h2> Hello, {props.username}</h2>
             <div className="user-icon">
-                <FiUser />
+                <Link to="/profile">
+                    <FiUser />
+                </Link>
             </div>
             <div className="menu-bar-container">
                 <div className="menu-bar" onClick={menuOpen}>

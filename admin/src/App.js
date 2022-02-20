@@ -10,6 +10,7 @@ import Goods from "./components/Goods/goods";
 import Sales from "./components/Sales/sales";
 import Users from "./components/Users/users";
 import Loading from "./components/Loading/Loading";
+import Profile from "./components/Profile/Profile";
 
 const GetToken = () => {
     if (!localStorage.getItem("token")) return <Login />;
@@ -22,7 +23,8 @@ const TokenValidation = () => {
     let navigate = useNavigate();
 
     useEffect(() => {
-        navigate("/dashboard");
+        let route = ["/dashboard", "/goods", "/sales", "/users", "/profile"];
+        if (!route.includes(window.location.pathname)) navigate("/dashboard");
         setTimeout(() => {
             axios
                 .post("http://192.168.0.106:3100/admin/checkToken", {
@@ -30,7 +32,6 @@ const TokenValidation = () => {
                 })
                 .then((res) => {
                     let username = res.data.username;
-                    username = username.slice(0, 1).toUpperCase() + username.slice(1);
                     setUsername(username);
                     setTokenValid(res.data.message);
                 })
@@ -56,6 +57,7 @@ const App = (props) => {
                     <Route path="/goods" element={<Goods />} />
                     <Route path="/sales" element={<Sales />} />
                     <Route path="/users" element={<Users />} />
+                    <Route path="/profile" element={<Profile username={props.username} />} />
                 </Routes>
             </main>
         </div>

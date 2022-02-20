@@ -67,4 +67,71 @@ app.post("/admin/checkToken", (req, res) => {
     );
 });
 
+app.post("/admin/editprofile", (req, res) => {
+    const { username, editedUsername, password, editedPassword } = req.body.data;
+    if (editedPassword !== "") {
+        db.query(
+            "UPDATE `admin` SET username = ?, password = ? WHERE username = ? AND password = ?",
+            [editedUsername, editedPassword, username, password],
+            (err, result) => {
+                try {
+                    if (err) throw err;
+                    else {
+                        const data = result.affectedRows;
+                        if (data === 1) {
+                            const token = createJwt(editedUsername, editedPassword);
+                            res.status(201).send({
+                                message: "Username and Password Changed",
+                                token: token,
+                            });
+                        } else {
+                            res.status(200).send({
+                                message:
+                                    "Username and Password not Changed, make sure you enter the password correctly",
+                            });
+                        }
+                    }
+                } catch (error) {
+                    console.log(error);
+                    res.status(200).send({
+                        message: "Username Exist, Username and password not changed",
+                    });
+                }
+            }
+        );
+    } else {
+        db.query(
+            "UPDATE `admin` SET username = ? WHERE username = ? AND password = ?",
+            [editedUsername, username, password],
+            (err, result) => {
+                try {
+                    if (err) throw err;
+                    else {
+                        const data = result.affectedRows;
+                        if (data === 1) {
+                            const token = createJwt(editedUsername, password);
+                            res.status(201).send({
+                                message: "Username Changed",
+                                token: token,
+                            });
+                        } else {
+                            res.status(200).send({
+                                message: "Username not Changed, make sure you enter the password correctly ",
+                            });
+                        }
+                    }
+                } catch (error) {
+                    console.log(error);
+                    res.status(200).send({ message: "Username Exist, Username and password not changed" });
+                }
+            }
+        );
+    }
+});
+
+const createJwt = (username, password) => {
+    let token = jwt.sign({ username, password }, "secret");
+    return token;
+};
+
 app.listen(3100, () => console.log("Server started on port 3100"));

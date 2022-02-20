@@ -3,7 +3,7 @@
     display: flex;
 }
 
-.header > h1 {
+.header > h2 {
     flex-grow: 1;
     display: flex;
     align-items: center;
@@ -16,12 +16,17 @@
 }
 
 .header > .user-icon > :first-child {
+    display: flex;
+    align-items: center;
+}
+
+.header > .user-icon > :first-child > :first-child {
     cursor: pointer;
     background-color: black;
     padding: 7.5px;
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     color: var(--color-highlight);
     margin: 5px;
 }
@@ -47,6 +52,10 @@
     width: 25px;
     margin-top: 5px;
     transition: transform 0.2s ease-in-out;
+}
+
+.header > .menu-bar-container > .menu-bar > span:first-child {
+    margin-top: 0;
 }
 
 .header > .menu-bar-container > .menu-bar > :first-child.open {

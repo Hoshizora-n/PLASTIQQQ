@@ -139,6 +139,20 @@ app.get("/admin/users", (req, res) => {
     });
 });
 
+app.post("/admin/users", (req, res) => {
+    const { username, password } = req.body.data;
+    if (username !== "" && password !== "") {
+        db.query("INSERT INTO `users` (username, password) VALUES (?, ?)", [username, password], (err, result) => {
+            if (err) res.status(200).send({ message: "Username Exist" });
+            else {
+                res.status(201).send({ message: "User Created" });
+            }
+        });
+    } else {
+        res.status(200).send({ message: "Username or Password cannot be empty" });
+    }
+});
+
 const createJwt = (username, password) => {
     let token = jwt.sign({ username, password }, "secret");
     return token;

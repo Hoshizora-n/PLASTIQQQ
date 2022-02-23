@@ -1,0 +1,15 @@
+table {
+    width: 100%;
+}
+
+table > thead > tr > :first-child {
+    width: 40px;
+}
+
+table > tbody > tr > :first-child {
+    text-align: center;
+}
+
+td {
+    border: 1px solid #bbb;
+}

@@ -22,7 +22,7 @@ const Login = () => {
         };
 
         axios
-            .post("http://192.168.0.106:3100/admin/login", data)
+            .post(`http://${process.env.REACT_APP_BASE_URL}:3100/admin/login`, data)
             .then((res) => {
                 if (res.data.message === "Login Success") {
                     localStorage.setItem("token", res.data.token);

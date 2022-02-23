@@ -18,7 +18,7 @@ const Profile = (props) => {
         };
 
         axios
-            .post("http://localhost:3100/admin/editprofile", {
+            .post(`http://${process.env.REACT_APP_BASE_URL}:3100/admin/editprofile`, {
                 data: data,
             })
             .then((res) => {

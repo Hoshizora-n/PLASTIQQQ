@@ -8,7 +8,7 @@ import Header from "./components/Header/header";
 import Dashboard from "./components/Dashboard/dashboard";
 import Goods from "./components/Goods/goods";
 import Sales from "./components/Sales/sales";
-import Users from "./components/Users/users";
+import UsersPage from "./components/UsersPage/usersPage";
 import Loading from "./components/Loading/Loading";
 import Profile from "./components/Profile/Profile";
 
@@ -23,11 +23,11 @@ const TokenValidation = () => {
     let navigate = useNavigate();
 
     useEffect(() => {
-        let route = ["/dashboard", "/goods", "/sales", "/users", "/profile"];
+        let route = ["/dashboard", "/goods", "/sales", "/users", "/users/admin", "/users/users", "/profile"];
         if (!route.includes(window.location.pathname)) navigate("/dashboard");
         setTimeout(() => {
             axios
-                .post("http://192.168.0.106:3100/admin/checkToken", {
+                .post(`http://${process.env.REACT_APP_BASE_URL}:3100/admin/checkToken`, {
                     token: localStorage.getItem("token"),
                 })
                 .then((res) => {
@@ -56,7 +56,7 @@ const App = (props) => {
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/goods" element={<Goods />} />
                     <Route path="/sales" element={<Sales />} />
-                    <Route path="/users" element={<Users />} />
+                    <Route path="/users" element={<UsersPage />} />
                     <Route path="/profile" element={<Profile username={props.username} />} />
                 </Routes>
             </main>

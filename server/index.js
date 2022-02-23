@@ -80,10 +80,17 @@ app.post("/admin/editprofile", (req, res) => {
                         const data = result.affectedRows;
                         if (data === 1) {
                             const token = createJwt(editedUsername, editedPassword);
-                            res.status(201).send({
-                                message: "Username and Password Changed",
-                                token: token,
-                            });
+                            if (editedUsername === username) {
+                                res.status(201).send({
+                                    message: "Password Changed",
+                                    token: token,
+                                });
+                            } else {
+                                res.status(201).send({
+                                    message: "Username and Password Changed",
+                                    token: token,
+                                });
+                            }
                         } else {
                             res.status(200).send({
                                 message:

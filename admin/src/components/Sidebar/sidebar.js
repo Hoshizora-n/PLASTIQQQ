@@ -19,16 +19,16 @@ const Sidebar = (props) => {
                 </div>
                 <nav>
                     <ul>
-                        <Link to={"/dashboard"} id={window.location.pathname === "/dashboard" ? "active" : ""}>
+                        <Link to={"/dashboard"} id={window.location.pathname.includes("/dashboard") ? "active" : ""}>
                             <MdDashboard /> Dashboard
                         </Link>
-                        <Link to={"/goods"} id={window.location.pathname === "/goods" ? "active" : ""}>
+                        <Link to={"/goods"} id={window.location.pathname.includes("/goods") ? "active" : ""}>
                             <FiPackage /> Goods
                         </Link>
-                        <Link to={"/sales"} id={window.location.pathname === "/sales" ? "active" : ""}>
+                        <Link to={"/sales"} id={window.location.pathname.includes("/sales") ? "active" : ""}>
                             <IoMdCart /> Sales
                         </Link>
-                        <Link to={"/users"} id={window.location.pathname === "/users" ? "active" : ""}>
+                        <Link to={"/users"} id={window.location.pathname.includes("/users") ? "active" : ""}>
                             <FiUsers /> Users
                         </Link>
                     </ul>

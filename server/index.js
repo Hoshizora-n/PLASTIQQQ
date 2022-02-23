@@ -17,13 +17,7 @@ app.post("/admin/login", (req, res) => {
             const data = result[0];
             if (data) {
                 if (data.password === password) {
-                    let token = jwt.sign(
-                        {
-                            username,
-                            password,
-                        },
-                        "secret"
-                    );
+                    let token = createJwt(username, password);
 
                     res.status(200).send({
                         message: "Login Success",
@@ -134,6 +128,15 @@ app.post("/admin/editprofile", (req, res) => {
             }
         );
     }
+});
+
+app.get("/admin/users", (req, res) => {
+    db.query("SELECT username, user_id FROM `users`", (err, result) => {
+        if (err) throw err;
+        else {
+            res.status(200).send(result);
+        }
+    });
 });
 
 const createJwt = (username, password) => {

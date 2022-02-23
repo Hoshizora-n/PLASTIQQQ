@@ -1,8 +1,17 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./usersPage.css";
 
 function UsersPage() {
+    const [users, setUsers] = useState([]);
+    useEffect(() => {
+        axios.get(`http://${process.env.REACT_APP_BASE_URL}:3100/admin/users`).then((res) => {
+            setUsers(res.data);
+        });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
     return (
         <div>
             <table>
@@ -14,13 +23,15 @@ function UsersPage() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>admin</td>
-                        <td>
-                            <button>Delete</button>
-                        </td>
-                    </tr>
+                    {users.map((user) => (
+                        <tr key={user.user_id}>
+                            <td>{user.user_id}</td>
+                            <td>{user.username}</td>
+                            <td>
+                                <button>Delete</button>
+                            </td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
             <button className="add-new-user">

@@ -5,7 +5,11 @@ const db = require("../db");
 const cors = require("cors");
 require("dotenv").config();
 
-router.use(cors());
+router.use(
+    cors({
+        origin: `http://${process.env.BASE_URL}:3000`,
+    })
+);
 
 router.post("/login", (req, res) => {
     const { username, password } = req.body;

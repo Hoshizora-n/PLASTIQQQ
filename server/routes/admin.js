@@ -7,7 +7,7 @@ require("dotenv").config();
 
 router.use(
     cors({
-        origin: `http://${process.env.BASE_URL}:3000`,
+        origin: `http://${process.env.BASE_URL}:3200`,
     })
 );
 

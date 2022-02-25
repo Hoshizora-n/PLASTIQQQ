@@ -28,7 +28,7 @@ const Sidebar = (props) => {
                         <Link to={"/sales"} id={window.location.pathname.includes("/sales") ? "active" : ""}>
                             <IoMdCart /> Sales
                         </Link>
-                        <Link to={"/users"} id={window.location.pathname.includes("/users") ? "active" : ""}>
+                        <Link to={"/users/admin"} id={window.location.pathname.includes("/users") ? "active" : ""}>
                             <FiUsers /> Users
                         </Link>
                     </ul>

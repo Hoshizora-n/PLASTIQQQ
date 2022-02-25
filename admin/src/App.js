@@ -12,6 +12,7 @@ import UsersPage from "./components/UsersPage/usersPage";
 import Loading from "./components/Loading/Loading";
 import Profile from "./components/Profile/Profile";
 import AddUser from "./components/UsersPage/AddUser/AddUser";
+import AddAdmin from "./components/UsersPage/AddAdmin/AddAdmin";
 
 const GetToken = () => {
     if (!localStorage.getItem("token")) return <Login />;
@@ -24,7 +25,17 @@ const TokenValidation = () => {
     let navigate = useNavigate();
 
     useEffect(() => {
-        let route = ["/dashboard", "/goods", "/sales", "/users", "/users/add-new-user", "/profile"];
+        let route = [
+            "/dashboard",
+            "/goods",
+            "/sales",
+            "/users",
+            "/users/admin",
+            "/users/users",
+            "/users/add-new-admin",
+            "/users/add-new-user",
+            "/profile",
+        ];
         if (!route.includes(window.location.pathname)) navigate("/dashboard");
         setTimeout(() => {
             axios
@@ -57,8 +68,9 @@ const App = (props) => {
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/goods" element={<Goods />} />
                     <Route path="/sales" element={<Sales />} />
-                    <Route path="/users" element={<UsersPage />} />
+                    <Route path="/users/:id" element={<UsersPage />} />
                     <Route path="/users/add-new-user" element={<AddUser />} />
+                    <Route path="/users/add-new-admin" element={<AddAdmin />} />
                     <Route path="/profile" element={<Profile username={props.username} />} />
                 </Routes>
             </main>

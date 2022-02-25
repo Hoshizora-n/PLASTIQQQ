@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import "./AddUser.css";
+import "./AddAdmin.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const AddUser = () => {
+const AddAdmin = () => {
     let navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -17,13 +17,13 @@ const AddUser = () => {
         };
 
         axios
-            .post(`http://${process.env.REACT_APP_BASE_URL}:3100/admin/users`, {
+            .post(`http://${process.env.REACT_APP_BASE_URL}:3100/admin/admin`, {
                 data: data,
             })
             .then((res) => {
                 if (res.status === 201) {
                     alert(res.data.message);
-                    navigate("/users/users");
+                    navigate("/users/admin");
                 } else alert(res.data.message);
             });
     };
@@ -53,11 +53,11 @@ const AddUser = () => {
                     />
                 </div>
                 <button type="submit" onClick={handleSubmit}>
-                    Add User
+                    Add Admin
                 </button>
             </form>
         </div>
     );
 };
 
-export default AddUser;
+export default AddAdmin;

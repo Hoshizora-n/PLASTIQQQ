@@ -132,6 +132,29 @@ router.post("/editprofile", (req, res) => {
     }
 });
 
+router.get("/admin", (req, res) => {
+    db.query("SELECT username, admin_id FROM `admin` ORDER BY `admin_id` ASC", (err, result) => {
+        if (err) throw err;
+        else {
+            res.status(200).send(result);
+        }
+    });
+});
+
+router.post("/admin", (req, res) => {
+    const { username, password } = req.body.data;
+    if (username !== "" && password !== "") {
+        db.query("INSERT INTO `admin` (username, password) VALUES (?, ?)", [username, password], (err, result) => {
+            if (err) res.status(200).send({ message: "Username Exist" });
+            else {
+                res.status(201).send({ message: "Admin Created" });
+            }
+        });
+    } else {
+        res.status(200).send({ message: "Username or Password cannot be empty" });
+    }
+});
+
 router.get("/users", (req, res) => {
     db.query("SELECT username, user_id FROM `users` ORDER BY `users`.`user_id` ASC", (err, result) => {
         if (err) throw err;

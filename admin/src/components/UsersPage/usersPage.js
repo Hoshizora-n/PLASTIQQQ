@@ -23,9 +23,9 @@ function UsersPage() {
                     </tr>
                 </thead>
                 <tbody>
-                    {users.map((user) => (
+                    {users.map((user, index) => (
                         <tr key={user.user_id}>
-                            <td>{user.user_id}</td>
+                            <td>{index + 1}</td>
                             <td>{user.username}</td>
                             <td>
                                 <button>Delete</button>

@@ -1,3 +1,28 @@
+div > .users-page-nav {
+    display: flex;
+    margin: 10px 0;
+}
+
+div > .users-page-nav > * {
+    padding: 5px;
+    text-decoration: none;
+    color: black;
+    background-color: white;
+    margin-right: 5px;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+div > .users-page-nav > *:hover {
+    background-color: var(--color-highlight);
+    color: white;
+}
+
+div > .users-page-nav > *.active {
+    background-color: var(--color-highlight);
+    color: white;
+}
+
 table {
     width: 100%;
 }

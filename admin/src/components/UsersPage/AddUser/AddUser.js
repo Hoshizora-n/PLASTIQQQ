@@ -29,6 +29,9 @@ const AddUser = () => {
     };
     return (
         <div>
+            <div>
+                <h2>Add New User</h2>
+            </div>
             <form>
                 <div className="add-user-input-username">
                     <label htmlFor="username">Username : </label>

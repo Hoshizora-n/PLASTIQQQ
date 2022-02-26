@@ -38,10 +38,14 @@ function UsersPage(props) {
     };
 
     return (
-        <>
+        <div>
             <div className="users-page-nav">
-                <Link to="/users/admin">Admin</Link>
-                <Link to="/users/users">Users</Link>
+                <Link to="/users/admin" className={id === "admin" ? "active" : ""}>
+                    Admin
+                </Link>
+                <Link to="/users/users" className={id === "users" ? "active" : ""}>
+                    Users
+                </Link>
             </div>
 
             {id === "admin" ? (
@@ -62,8 +66,7 @@ function UsersPage(props) {
                                     <td>{admin.username}</td>
                                     <td>
                                         <button
-                                            disabled
-                                            // disabled={props.username === admin.username ? false : true}
+                                            disabled={props.username === admin.username ? false : true}
                                             onClick={handleDelete}
                                         >
                                             Delete
@@ -105,7 +108,7 @@ function UsersPage(props) {
                     </button>
                 </>
             )}
-        </>
+        </div>
     );
 }
 

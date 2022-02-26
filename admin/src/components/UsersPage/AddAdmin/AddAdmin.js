@@ -29,6 +29,9 @@ const AddAdmin = () => {
     };
     return (
         <div>
+            <div>
+                <h2>Add New Admin</h2>
+            </div>
             <form>
                 <div className="add-user-input-username">
                     <label htmlFor="username">Username : </label>

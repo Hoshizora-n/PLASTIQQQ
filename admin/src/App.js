@@ -13,7 +13,6 @@ import Loading from "./components/Loading/Loading";
 import Profile from "./components/Profile/Profile";
 import AddUser from "./components/UsersPage/AddUser/AddUser";
 import AddAdmin from "./components/UsersPage/AddAdmin/AddAdmin";
-import Redirector from "./components/Redirector/Redirector";
 
 const GetToken = () => {
     if (!localStorage.getItem("token")) return <Login />;

@@ -1,13 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "./usersPage.css";
 
 function UsersPage(props) {
     let [users, setUsers] = useState([]);
     let [admin, setAdmin] = useState([]);
     let { id } = useParams();
-    let navigate = useNavigate();
 
     useEffect(() => {
         axios.get(`http://${process.env.REACT_APP_BASE_URL}:3100/admin/admin`).then((res) => {

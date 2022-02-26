@@ -1,21 +1,42 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import "./usersPage.css";
 
-function UsersPage() {
-    const [users, setUsers] = useState([]);
-    const [admin, setAdmin] = useState([]);
+function UsersPage(props) {
+    let [users, setUsers] = useState([]);
+    let [admin, setAdmin] = useState([]);
     let { id } = useParams();
+    let navigate = useNavigate();
+
     useEffect(() => {
         axios.get(`http://${process.env.REACT_APP_BASE_URL}:3100/admin/admin`).then((res) => {
-            setAdmin(res.data);
+            setAdmin((previousValue) => {
+                return (previousValue = res.data);
+            });
         });
         axios.get(`http://${process.env.REACT_APP_BASE_URL}:3100/admin/users`).then((res) => {
-            setUsers(res.data);
+            setUsers((previousValue) => {
+                return (previousValue = res.data);
+            });
         });
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    const handleDelete = (e) => {
+        const parentElement = e.target.parentElement.parentElement;
+        const id = parentElement.getAttribute("id");
+        // const name = parentElement.getAttribute("name");
+        const role = parentElement.getAttribute("role");
+        axios.delete(`http://${process.env.REACT_APP_BASE_URL}:3100/admin/${role}/${id}`).then((res) => {
+            if (res.data.message === "User Deleted" || res.data.message === "Admin Deleted") {
+                alert(res.data.message);
+                window.location.reload();
+            } else {
+                alert(res.data.message);
+            }
+        });
+    };
 
     return (
         <>
@@ -24,7 +45,7 @@ function UsersPage() {
                 <Link to="/users/users">Users</Link>
             </div>
 
-            {id === "users" ? (
+            {id === "admin" ? (
                 <>
                     <table>
                         <thead>
@@ -35,19 +56,26 @@ function UsersPage() {
                             </tr>
                         </thead>
                         <tbody>
-                            {users.map((user, index) => (
-                                <tr key={user.user_id}>
+                            {admin.map((admin, index) => (
+                                // eslint-disable-next-line jsx-a11y/aria-role
+                                <tr key={admin.admin_id} role="admin" id={admin.admin_id} name={admin.username}>
                                     <td>{index + 1}</td>
-                                    <td>{user.username}</td>
+                                    <td>{admin.username}</td>
                                     <td>
-                                        <button>Delete</button>
+                                        <button
+                                            disabled
+                                            // disabled={props.username === admin.username ? false : true}
+                                            onClick={handleDelete}
+                                        >
+                                            Delete
+                                        </button>
                                     </td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
-                    <button className="add-new-user">
-                        <Link to="/users/add-new-user">Add New Users</Link>
+                    <button className="add-new-admin">
+                        <Link to="/users/add-new-admin">Add New Admin</Link>
                     </button>
                 </>
             ) : (
@@ -61,19 +89,20 @@ function UsersPage() {
                             </tr>
                         </thead>
                         <tbody>
-                            {admin.map((admin, index) => (
-                                <tr key={admin.admin_id}>
-                                    <td>{index + 1}</td>
-                                    <td>{admin.username}</td>
+                            {users.map((user, index) => (
+                                // eslint-disable-next-line jsx-a11y/aria-role
+                                <tr key={user.user_id} role="users" id={user.user_id} name={user.username}>
+                                    <td id={user.user_id}>{index + 1}</td>
+                                    <td id={user.username}>{user.username}</td>
                                     <td>
-                                        <button disabled>Delete</button>
+                                        <button onClick={handleDelete}>Delete</button>
                                     </td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
-                    <button className="add-new-admin">
-                        <Link to="/users/add-new-admin">Add New Admin</Link>
+                    <button className="add-new-user">
+                        <Link to="/users/add-new-user">Add New Users</Link>
                     </button>
                 </>
             )}

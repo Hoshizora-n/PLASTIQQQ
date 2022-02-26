@@ -13,6 +13,7 @@ import Loading from "./components/Loading/Loading";
 import Profile from "./components/Profile/Profile";
 import AddUser from "./components/UsersPage/AddUser/AddUser";
 import AddAdmin from "./components/UsersPage/AddAdmin/AddAdmin";
+import Redirector from "./components/Redirector/Redirector";
 
 const GetToken = () => {
     if (!localStorage.getItem("token")) return <Login />;
@@ -68,7 +69,7 @@ const App = (props) => {
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/goods" element={<Goods />} />
                     <Route path="/sales" element={<Sales />} />
-                    <Route path="/users/:id" element={<UsersPage />} />
+                    <Route path="/users/:id" element={<UsersPage username={props.username} />} />
                     <Route path="/users/add-new-user" element={<AddUser />} />
                     <Route path="/users/add-new-admin" element={<AddAdmin />} />
                     <Route path="/profile" element={<Profile username={props.username} />} />

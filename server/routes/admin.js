@@ -178,6 +178,34 @@ router.post("/users", (req, res) => {
     }
 });
 
+router.delete("/admin/:id", (req, res) => {
+    const id = req.params.id;
+    db.query("DELETE FROM `admin` WHERE admin_id = ?", [id], (err, result) => {
+        if (err) throw err;
+        else {
+            if (result.affectedRows === 1) {
+                res.status(202).send({ message: "Admin Deleted" });
+            } else {
+                res.status(200).send({ message: "Admin with that id is not found" });
+            }
+        }
+    });
+});
+
+router.delete("/users/:id", (req, res) => {
+    const id = req.params.id;
+    db.query("DELETE FROM `users` WHERE user_id = ?", [id], (err, result) => {
+        if (err) throw err;
+        else {
+            if (result.affectedRows === 1) {
+                res.status(202).send({ message: "User Deleted" });
+            } else {
+                res.status(200).send({ message: "User with that id is not found" });
+            }
+        }
+    });
+});
+
 const createJwt = (username, password) => {
     let token = jwt.sign({ username, password }, "secret");
     return token;

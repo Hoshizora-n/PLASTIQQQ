@@ -5,7 +5,7 @@ function Loading() {
     return (
         <div className="loadingContainer">
             <div className="loading"></div>
-            <div>Authenticating</div>
+            <div>Loading</div>
         </div>
     );
 }

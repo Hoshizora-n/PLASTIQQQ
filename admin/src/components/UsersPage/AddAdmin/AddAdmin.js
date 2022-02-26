@@ -28,12 +28,10 @@ const AddAdmin = () => {
             });
     };
     return (
-        <div>
-            <div>
-                <h2>Add New Admin</h2>
-            </div>
+        <div className="add-container">
             <form>
-                <div className="add-user-input-username">
+                <h2>Add New Admin</h2>
+                <div className="add-admin-input-username">
                     <label htmlFor="username">Username : </label>
                     <input
                         type="text"
@@ -44,7 +42,7 @@ const AddAdmin = () => {
                         required
                     />
                 </div>
-                <div className="add-user-input-password">
+                <div className="add-admin-input-password">
                     <label htmlFor="password">Password : </label>
                     <input
                         type="text"

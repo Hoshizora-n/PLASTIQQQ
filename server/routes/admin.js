@@ -217,6 +217,7 @@ const goodsStorage = multer.diskStorage({
     },
 });
 
+// Goods API
 const uploadGoodsFilter = (req, file, cb) => {
     if (file.mimetype === "image/jpeg" || file.mimetype === "image/png" || file.mimetype === "image/jpg") {
         cb(null, true);
@@ -231,7 +232,7 @@ const uploadGoods = multer({
     },
     fileFilter: uploadGoodsFilter,
 }).single("file");
-router.post("/goods", uploadGoods, (req, res, next) => {
+router.post("/goods", uploadGoods, (req, res) => {
     const { kodeBarang, namaBarang, hargaBarang, stok, deskripsi } = req.body;
     const filePath = req.file.path;
     db.query(
@@ -246,6 +247,35 @@ router.post("/goods", uploadGoods, (req, res, next) => {
         }
     );
 });
+
+router.get("/goods", (req, res) => {
+    db.query("SELECT * FROM `barang` ORDER BY `barang`.`id_barang` ASC", (err, result) => {
+        if (err) throw err;
+        else {
+            res.status(200).send(result);
+        }
+    });
+});
+
+router.delete("/goods/:id", (req, res) => {
+    const { id } = req.params;
+    db.query("DELETE FROM `barang` WHERE kode_barang = ?", [id], (err, result) => {
+        if (err) console.log(err);
+        else {
+            if (result.affectedRows === 1) {
+                res.status(202).send({ message: "Barang Deleted" });
+            } else {
+                res.status(200).send({ message: "Barang with that kode_barang is not found" });
+            }
+        }
+    });
+});
+
+router.put("/goods/:id", (req, res) => {
+    const { id } = req.params;
+    console.log(id);
+});
+// end Goods API
 
 const createJwt = (username, password) => {
     let token = jwt.sign({ username, password }, "secret");

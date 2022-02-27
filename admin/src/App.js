@@ -14,6 +14,7 @@ import Profile from "./components/Profile/Profile";
 import AddUser from "./components/UsersPage/AddUser/AddUser";
 import AddAdmin from "./components/UsersPage/AddAdmin/AddAdmin";
 import AddGoods from "./components/Goods/AddGoods/AddGoods";
+import EditGoods from "./components/Goods/EditGoods/EditGoods";
 
 const GetToken = () => {
     if (!localStorage.getItem("token")) return <Login />;
@@ -70,6 +71,7 @@ const App = (props) => {
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/goods" element={<Goods />} />
                     <Route path="/goods/add-new-goods" element={<AddGoods />} />
+                    <Route path="/goods/edit" element={<EditGoods />} />
                     <Route path="/sales" element={<Sales />} />
                     <Route path="/users/:id" element={<UsersPage username={props.username} />} />
                     <Route path="/users/add-new-user" element={<AddUser />} />

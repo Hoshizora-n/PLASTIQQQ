@@ -43,7 +43,7 @@ const AddGoods = () => {
         } else alert("All field must be filled");
     };
     return (
-        <div className="add-container">
+        <div className="add-goods">
             <form>
                 <h2>Add New Goods</h2>
                 <div className="add-admin-input-kodeBarang">
@@ -102,7 +102,7 @@ const AddGoods = () => {
                     />
                 </div>
                 <div className="add-admin-input-foto">
-                    <label htmlFor="foto">foto : </label>
+                    <label htmlFor="foto">foto (.png/.jpg/.jpeg) : </label>
                     <input
                         type="file"
                         alt="foto"

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import "./AddUser.css";
 import axios from "axios";
+import "../add.css";
 import { useNavigate } from "react-router-dom";
 
 const AddUser = () => {

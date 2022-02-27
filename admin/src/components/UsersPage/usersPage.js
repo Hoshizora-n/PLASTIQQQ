@@ -25,16 +25,18 @@ function UsersPage(props) {
     const handleDelete = (e) => {
         const parentElement = e.target.parentElement.parentElement;
         const id = parentElement.getAttribute("id");
-        // const name = parentElement.getAttribute("name");
         const role = parentElement.getAttribute("role");
-        axios.delete(`http://${process.env.REACT_APP_BASE_URL}:3100/admin/${role}/${id}`).then((res) => {
-            if (res.data.message === "User Deleted" || res.data.message === "Admin Deleted") {
-                alert(res.data.message);
-                window.location.reload();
-            } else {
-                alert(res.data.message);
-            }
-        });
+        axios
+            .delete(`http://${process.env.REACT_APP_BASE_URL}:3100/admin/${role}/${id}`)
+            .then((res) => {
+                if (res.data.message === "User Deleted" || res.data.message === "Admin Deleted") {
+                    alert(res.data.message);
+                    window.location.reload();
+                } else {
+                    alert(res.data.message);
+                }
+            })
+            .catch((err) => console.log(err));
     };
 
     return (

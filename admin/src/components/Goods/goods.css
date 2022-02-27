@@ -6,14 +6,16 @@
     margin-right: 5px;
 }
 
+.card-image > img {
+    height: 200px;
+    width: 200px;
+    object-fit: cover;
+}
+
 .card-body {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-}
-
-.card-body > .kode-barang {
-    display: none;
 }
 
 .card-body > .deskripsi {

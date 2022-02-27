@@ -3,6 +3,7 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use("/images/goods", express.static("images/goods"));
 
 const adminRoute = require("./routes/admin");
 const userRoute = require("./routes/user");

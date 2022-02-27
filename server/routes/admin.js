@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const db = require("../db");
 const cors = require("cors");
 const multer = require("multer");
+const fs = require("fs");
 require("dotenv").config();
 
 router.use(
@@ -207,10 +208,43 @@ router.delete("/users/:id", (req, res) => {
     });
 });
 
-const uploadGoods = multer();
-router.post("/goods", (req, res, next) => {
-    console.log("hey");
-    // res.status(201).send({ message: "Goods Created" });
+const goodsStorage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, "./images/goods");
+    },
+    filename: (req, file, cb) => {
+        cb(null, req.body.kodeBarang + "-" + file.originalname);
+    },
+});
+
+const uploadGoodsFilter = (req, file, cb) => {
+    if (file.mimetype === "image/jpeg" || file.mimetype === "image/png" || file.mimetype === "image/jpg") {
+        cb(null, true);
+    } else {
+        cb(new Error("insert png/jpg/jpeg file"), false);
+    }
+};
+const uploadGoods = multer({
+    storage: goodsStorage,
+    limits: {
+        fileSize: 1024 * 1024 * 5,
+    },
+    fileFilter: uploadGoodsFilter,
+}).single("file");
+router.post("/goods", uploadGoods, (req, res, next) => {
+    const { kodeBarang, namaBarang, hargaBarang, stok, deskripsi } = req.body;
+    const filePath = req.file.path;
+    db.query(
+        "INSERT INTO `barang` (kode_barang, nama_barang, harga_barang, stok, deskripsi, foto_barang) VALUES (?, ?, ?, ?, ?, ?)",
+        [kodeBarang, namaBarang, hargaBarang, stok, deskripsi, filePath],
+        (err, result) => {
+            if (err) {
+                res.status(200).send({ err: err, message: "Kode Barang Exist" });
+            } else {
+                res.status(201).send({ message: "Barang Created" });
+            }
+        }
+    );
 });
 
 const createJwt = (username, password) => {

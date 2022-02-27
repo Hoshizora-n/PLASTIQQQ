@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import "./AddGoods.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const AddGoods = () => {
+    let navigate = useNavigate();
+
     const [kodeBarang, setKodeBarang] = useState("");
     const [namaBarang, setNamaBarang] = useState("");
     const [hargaBarang, setHargaBarang] = useState("");
@@ -13,30 +16,31 @@ const AddGoods = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const data = new FormData();
-        data.append("kodeBarang", kodeBarang);
-        data.append("namaBarang", namaBarang);
-        data.append("hargaBarang", hargaBarang);
-        data.append("stok", stok);
-        data.append("deskripsi", deskripsi);
-        data.append("foto", foto);
+        const allData = [kodeBarang, namaBarang, hargaBarang, stok, deskripsi];
+        const check = allData.every((data) => data !== "");
 
-        axios
-            .post(`http://${process.env.REACT_APP_BASE_URL}:3100/admin/goods`, data)
-            .then((res) => {
-                console.log(res);
-            })
-            .catch((err) => console.log(err));
-        // axios
-        //     .post(`http://${process.env.REACT_APP_BASE_URL}:3100/admin/goods`, {
-        //         data,
-        //     })
-        //     .then((res) => {
-        //         if (res.status === 201) {
-        //             alert(res.data.message);
-        //         } else alert(res.data.message);
-        //     })
-        //     .catch((err) => console.log(err));
+        if (check && foto !== null && foto !== undefined) {
+            const data = new FormData();
+            data.append("kodeBarang", kodeBarang);
+            data.append("namaBarang", namaBarang);
+            data.append("hargaBarang", hargaBarang);
+            data.append("stok", stok);
+            data.append("deskripsi", deskripsi);
+            data.append("file", foto);
+
+            axios
+                .post(`http://${process.env.REACT_APP_BASE_URL}:3100/admin/goods`, data)
+                .then((res) => {
+                    if (res.data.message === "Barang Created") {
+                        alert(res.data.message);
+                        navigate("/goods");
+                    } else alert(res.data.message + " " + res.data.err);
+                })
+                .catch((error) => {
+                    const { response } = error;
+                    alert(response.statusText);
+                });
+        } else alert("All field must be filled");
     };
     return (
         <div className="add-container">

@@ -4,7 +4,6 @@ const jwt = require("jsonwebtoken");
 const db = require("../db");
 const cors = require("cors");
 const multer = require("multer");
-const fs = require("fs");
 require("dotenv").config();
 
 router.use(

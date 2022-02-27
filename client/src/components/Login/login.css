@@ -1,0 +1,62 @@
+.login {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login > form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background-color: white;
+    padding: 0 20px 20px 20px;
+}
+
+.login > form > h1 {
+    font-size: 2em;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.login > form > .inputForm > * > input {
+    width: 100%;
+    transition: all 0.3s;
+}
+
+.login > form > .inputForm > *:focus-within > label {
+    color: #5584c5;
+    transition: color 0.1s;
+}
+
+.login > form > .inputForm > *:focus-within > input {
+    outline: none;
+    border-radius: 3px;
+    border: 3px solid var(--color-highlight);
+}
+
+.login > form > .inputForm > .usernameInput > input {
+    margin-bottom: 5px;
+}
+
+.login > form > button {
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.login > form > button:hover {
+    background-color: var(--color-highlight);
+}
+
+.login > form > button:focus {
+    border: none;
+    outline: #5584c5;
+    background-color: #5584c5;
+}

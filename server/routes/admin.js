@@ -271,9 +271,43 @@ router.delete("/goods/:id", (req, res) => {
     });
 });
 
+router.get("/goods/:id", (req, res) => {
+    db.query(
+        "SELECT stok, harga_barang, deskripsi FROM `barang` WHERE kode_barang = ?",
+        [req.params.id],
+        (err, result) => {
+            if (err) console.log(err);
+            else {
+                if (result.length > 0) {
+                    res.status(200).send({
+                        message: "Barang Found",
+                        harga: result[0].harga_barang,
+                        stok: result[0].stok,
+                        deskripsi: result[0].deskripsi,
+                    });
+                }
+            }
+        }
+    );
+});
+
 router.put("/goods/:id", (req, res) => {
     const { id } = req.params;
-    console.log(id);
+    const { harga, stok, deskripsi } = req.body;
+    db.query(
+        "UPDATE `barang` SET harga_barang = ?, stok = ?, deskripsi = ? WHERE kode_barang = ?",
+        [harga, stok, deskripsi, id],
+        (err, result) => {
+            if (err) console.log(err);
+            else {
+                if (result.affectedRows === 1) {
+                    res.status(202).send({ message: "Barang Updated" });
+                } else {
+                    res.status(200).send({ message: "Barang with that kode_barang is not found" });
+                }
+            }
+        }
+    );
 });
 // end Goods API
 

@@ -22,7 +22,7 @@ function Goods() {
     const handleEditGoods = (e) => {
         const parentElement = e.target.parentElement.parentElement;
         const kodeBarang = parentElement.getAttribute("id");
-        console.log(kodeBarang);
+        sessionStorage.setItem("kodeBarang-edit", kodeBarang);
     };
 
     const handleDeleteGoods = (e) => {

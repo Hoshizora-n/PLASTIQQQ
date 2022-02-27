@@ -1,5 +1,7 @@
 .card {
     display: flex;
+    background-color: #fff;
+    margin-bottom: 5px;
 }
 
 .card-image {

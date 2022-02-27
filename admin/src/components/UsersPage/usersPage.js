@@ -76,9 +76,9 @@ function UsersPage(props) {
                             ))}
                         </tbody>
                     </table>
-                    <button className="add-new-admin">
-                        <Link to="/users/add-new-admin">Add New Admin</Link>
-                    </button>
+                    <Link to="/users/add-new-admin" className="add-new">
+                        Add New Admin
+                    </Link>
                 </>
             ) : (
                 <>
@@ -103,9 +103,9 @@ function UsersPage(props) {
                             ))}
                         </tbody>
                     </table>
-                    <button className="add-new-user">
-                        <Link to="/users/add-new-user">Add New Users</Link>
-                    </button>
+                    <Link to="/users/add-new-user" className="add-new">
+                        Add New Users
+                    </Link>
                 </>
             )}
         </div>

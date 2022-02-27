@@ -1,62 +1,76 @@
-div > .users-page-nav {
+.card {
     display: flex;
-    margin: 10px 0;
 }
 
-div > .users-page-nav > * {
-    padding: 5px;
-    text-decoration: none;
-    color: black;
-    background-color: white;
+.card-image {
     margin-right: 5px;
-    border-radius: 5px;
-    font-size: 16px;
 }
 
-div > .users-page-nav > *:hover {
-    background-color: var(--color-highlight);
-    color: white;
+.card-body {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 }
 
-div > .users-page-nav > *.active {
-    background-color: var(--color-highlight);
-    color: white;
+.card-body > .kode-barang {
+    display: none;
 }
 
-table {
-    width: 100%;
+.card-body > .deskripsi {
+    flex-grow: 1;
 }
 
-table > thead > tr > :first-child {
-    width: 40px;
+.card-action {
+    display: flex;
+    flex-direction: column;
+    margin-right: 5px;
 }
 
-table > tbody > tr > :first-child {
-    text-align: center;
-}
-
-td {
-    border: 1px solid #bbb;
-}
-
-.add-new-admin,
-.add-new-user {
-    margin-top: 10px;
-    margin-left: 2px;
-    border: none;
-}
-
-.add-new-admin > *,
-.add-new-user > * {
-    color: black;
+.card-action > * {
     text-decoration: none;
     padding: 5px;
-    background-color: white;
-    border-radius: 5px;
+    border-radius: 3px;
+    margin-bottom: 5px;
+    text-align: center;
+    transition: all 0.2s ease-in-out;
 }
 
-.add-new-admin > *:hover,
-.add-new-user > *:hover {
-    background-color: var(--color-highlight);
+.card-action > .edit-btn {
+    border: 2px solid #f0ad4e;
+    color: #f0ad4e;
+}
+
+.card-action > .edit-btn:hover {
+    background-color: #f0ad4e;
     color: white;
+}
+
+.card-action > .delete-btn {
+    border: 2px solid #d9534f;
+    color: #d9534f;
+}
+
+.card-action > .delete-btn:hover {
+    background-color: #d9534f;
+    color: white;
+}
+
+.add-new {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    text-decoration: none;
+    color: #fff;
+    padding: 10px;
+    background-color: var(--color-highlight);
+}
+
+@media screen and (max-width: 600px) {
+    .card {
+        flex-direction: column;
+    }
+
+    .card-image {
+        text-align: center;
+    }
 }

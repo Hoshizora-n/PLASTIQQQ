@@ -1,0 +1,62 @@
+div > .users-page-nav {
+    display: flex;
+    margin: 10px 0;
+}
+
+div > .users-page-nav > * {
+    padding: 5px;
+    text-decoration: none;
+    color: black;
+    background-color: white;
+    margin-right: 5px;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+div > .users-page-nav > *:hover {
+    background-color: var(--color-highlight);
+    color: white;
+}
+
+div > .users-page-nav > *.active {
+    background-color: var(--color-highlight);
+    color: white;
+}
+
+table {
+    width: 100%;
+}
+
+table > thead > tr > :first-child {
+    width: 40px;
+}
+
+table > tbody > tr > :first-child {
+    text-align: center;
+}
+
+td {
+    border: 1px solid #bbb;
+}
+
+.add-new-admin,
+.add-new-user {
+    margin-top: 10px;
+    margin-left: 2px;
+    border: none;
+}
+
+.add-new-admin > *,
+.add-new-user > * {
+    color: black;
+    text-decoration: none;
+    padding: 5px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.add-new-admin > *:hover,
+.add-new-user > *:hover {
+    background-color: var(--color-highlight);
+    color: white;
+}

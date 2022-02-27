@@ -3,6 +3,7 @@ const router = express.Router();
 const jwt = require("jsonwebtoken");
 const db = require("../db");
 const cors = require("cors");
+const multer = require("multer");
 require("dotenv").config();
 
 router.use(
@@ -204,6 +205,12 @@ router.delete("/users/:id", (req, res) => {
             }
         }
     });
+});
+
+const uploadGoods = multer();
+router.post("/goods", (req, res, next) => {
+    console.log("hey");
+    // res.status(201).send({ message: "Goods Created" });
 });
 
 const createJwt = (username, password) => {

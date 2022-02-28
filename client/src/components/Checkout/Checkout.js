@@ -95,8 +95,6 @@ const Checkout = (props) => {
             checkoutItems: checkoutItems,
         };
 
-        console.log(data);
-
         axios
             .post(`http://${process.env.REACT_APP_BASE_URL}:3100/user/checkout`, data)
             .then((res) => {
@@ -109,12 +107,6 @@ const Checkout = (props) => {
             })
             .catch((err) => console.log(err));
     };
-
-    // const handleDeleteCart = (e) => {
-    //     e.preventDefault();
-    //     const kode_barang = e.target.parentElement.parentElement.id;
-    //     props.setCart((prevState) => prevState.filter((item) => item !== kode_barang));
-    // };
 
     return (
         <div className="checkout-container">
@@ -184,7 +176,6 @@ const Checkout = (props) => {
                 <h3>Rp. {subTotal}</h3>
             </div>
             <div className="checkout-button">
-                {/* <button className="update">Update</button> */}
                 <button className="checkout" onClick={handleCheckout}>
                     Checkout
                 </button>

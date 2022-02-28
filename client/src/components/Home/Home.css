@@ -34,15 +34,27 @@
     flex-grow: 1;
 }
 
-.card-body > p:last-child {
+.card-body > button {
+    border: none;
+    padding: 5px;
     display: flex;
     align-items: center;
+    justify-content: center;
     color: white;
     background-color: var(--color-highlight);
     cursor: pointer;
 }
 
-.card-body > p > * {
+.card-body > button:disabled {
+    background-color: var(--color-bg);
+    color: var(--color-highlight);
+    cursor: not-allowed;
+}
+
+.card-body > button > * {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-right: 5px;
     font-size: larger;
 }

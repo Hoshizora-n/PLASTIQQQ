@@ -34,6 +34,7 @@ const Home = (props) => {
             <div className="home-container">
                 {goods.map((good) => {
                     const filePath = `http://${process.env.REACT_APP_BASE_URL}:3100/${good.foto_barang}`;
+                    const stok = good.stok;
                     return (
                         <div className="card" key={good.kode_barang}>
                             <div className="card-image">
@@ -44,10 +45,10 @@ const Home = (props) => {
                                 <h3>{good.nama_barang}</h3>
                                 <p>{good.deskripsi}</p>
                                 <p>Harga : Rp. {good.harga_barang}</p>
-                                <p className="stok">Stok : {good.stok}</p>
-                                <p onClick={addToCart} id={good.kode_barang}>
+                                <p className="stok">Stok : {stok}</p>
+                                <button onClick={addToCart} id={good.kode_barang} disabled={stok === 0 ? true : false}>
                                     <FiShoppingCart /> Add to Cart
-                                </p>
+                                </button>
                             </div>
                         </div>
                     );

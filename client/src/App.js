@@ -52,7 +52,7 @@ function App(props) {
                 <Routes>
                     <Route path="/home" element={<Home username={props.username} setCart={setCart} />} />
                     <Route path="/profile" element={<Profile username={props.username} />} />
-                    <Route path="/checkout" element={<Checkout cart={cart} />} />
+                    <Route path="/checkout" element={<Checkout cart={cart} username={props.username} />} />
                 </Routes>
             </main>
         </div>

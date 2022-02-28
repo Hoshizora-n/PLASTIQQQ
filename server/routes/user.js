@@ -152,6 +152,48 @@ router.get("/cart/:id", (req, res) => {
     });
 });
 
+router.post("/checkout", (req, res) => {
+    const tanggal = new Date();
+    const bulan =
+        (tanggal.getMonth() + 1).toString().length === 1 ? "0" + (tanggal.getMonth() + 1) : tanggal.getMonth() + 1;
+    const hari = tanggal.getDate().toString().length === 1 ? "0" + tanggal.getDate() : tanggal.getDate();
+    const jam = tanggal.getHours().toString().length === 1 ? "0" + tanggal.getHours() : tanggal.getHours();
+    const menit = tanggal.getMinutes().toString().length === 1 ? "0" + tanggal.getMinutes() : tanggal.getMinutes();
+    const detik = tanggal.getSeconds().toString().length === 1 ? "0" + tanggal.getSeconds() : tanggal.getSeconds();
+
+    const { username, checkoutItems } = req.body;
+    const kode_faktur = "F-" + Date.now();
+    const tanggal_faktur = `${tanggal.getFullYear()}-${bulan}-${hari} ${jam}:${menit}:${detik}`;
+    let subtotal = 0;
+
+    for (let i = 0; i < checkoutItems.length; i++) {
+        subtotal += parseInt(checkoutItems[i].total_harga);
+        db.query(
+            "INSERT INTO `pembelian` (kode_faktur, kode_barang, quantity, total) VALUES (?,?,?,?)",
+            [kode_faktur, checkoutItems[i].kode_barang, checkoutItems[i].quantity, checkoutItems[i].total_harga],
+            (err, result) => {
+                if (err) throw err;
+                else {
+                    console.log(result.affectedRows);
+                }
+            }
+        );
+    }
+
+    db.query(
+        "INSERT INTO `faktur_pembelian` VALUES (?,?,?,?)",
+        [kode_faktur, username, tanggal_faktur, subtotal],
+        (err, result) => {
+            if (err) throw err;
+            else {
+                if (result.affectedRows === 1) {
+                    res.status(201).send({ message: "Checkout Success" });
+                }
+            }
+        }
+    );
+});
+
 const createJwt = (username, password) => {
     let token = jwt.sign({ username, password }, "secret");
     return token;

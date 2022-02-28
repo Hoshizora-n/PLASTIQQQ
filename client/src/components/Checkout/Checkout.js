@@ -43,7 +43,38 @@ const Checkout = (props) => {
 
     const handleCheckout = (e) => {
         e.preventDefault();
-        console.log(e.target);
+        const cart = e.target.parentElement.parentElement;
+        const cartItems = cart.getElementsByClassName("checkout-item");
+
+        let checkoutItems = [];
+        for (let i = 0; i < cartItems.length; i++) {
+            const cartInfo = cartItems[i].getElementsByClassName("checkout-item-info")[0];
+            const cartTotal = cartItems[i].getElementsByClassName("checkout-item-total")[0];
+
+            const kode_barang = cartItems[i].id;
+            const quantity_barang = cartInfo.getElementsByTagName("input")[0].value;
+            const total_harga = cartTotal.getElementsByTagName("p")[0].getAttribute("total");
+
+            const data = {
+                kode_barang: kode_barang,
+                quantity: quantity_barang,
+                total_harga: total_harga,
+            };
+
+            checkoutItems.push(data);
+        }
+
+        const data = {
+            username: props.username,
+            checkoutItems: checkoutItems,
+        };
+
+        axios
+            .post(`http://${process.env.REACT_APP_BASE_URL}:3100/user/checkout`, data)
+            .then((res) => {
+                console.log(res.data.message);
+            })
+            .catch((err) => console.log(err));
     };
 
     return (
@@ -87,7 +118,7 @@ const Checkout = (props) => {
                                 />
                             </div>
                             <div className="checkout-item-total">
-                                <p>Total : Rp. {total[index]}</p>
+                                <p total={total[index]}>Total : Rp. {total[index]}</p>
                             </div>
                         </div>
                     );

@@ -42,6 +42,18 @@ const Checkout = (props) => {
             }
         }
 
+        setTotal({
+            0: 0,
+            1: 0,
+            2: 0,
+            3: 0,
+            4: 0,
+            5: 0,
+            6: 0,
+            7: 0,
+            8: 0,
+        });
+
         for (let i = 0; i < props.cart.length; i++) {
             axios
                 .get(`http://${process.env.REACT_APP_BASE_URL}:3100/user/cart/${props.cart[i]}`)
@@ -94,11 +106,11 @@ const Checkout = (props) => {
             .catch((err) => console.log(err));
     };
 
-    const handleDeleteCart = (e) => {
-        e.preventDefault();
-        const kode_barang = e.target.parentElement.parentElement.id;
-        props.setCart((prevState) => prevState.filter((item) => item !== kode_barang));
-    };
+    // const handleDeleteCart = (e) => {
+    //     e.preventDefault();
+    //     const kode_barang = e.target.parentElement.parentElement.id;
+    //     props.setCart((prevState) => prevState.filter((item) => item !== kode_barang));
+    // };
 
     return (
         <div className="checkout-container">
@@ -141,7 +153,19 @@ const Checkout = (props) => {
                                 />
                             </div>
                             <div className="checkout-item-total">
-                                <button className="delete-cart-item" onClick={handleDeleteCart}>
+                                <button
+                                    className="delete-cart-item"
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        props.setCart((prevState) => prevState.filter((item) => item !== kode_barang));
+                                        setTotal((prevState) => {
+                                            return {
+                                                ...prevState,
+                                                [index]: 0,
+                                            };
+                                        });
+                                    }}
+                                >
                                     Delete
                                 </button>
                                 <p total={total[index]}>Total : Rp. {total[index]}</p>
@@ -155,7 +179,7 @@ const Checkout = (props) => {
                 <h3>Rp. {subTotal}</h3>
             </div>
             <div className="checkout-button">
-                <button className="update">Update</button>
+                {/* <button className="update">Update</button> */}
                 <button className="checkout" onClick={handleCheckout}>
                     Checkout
                 </button>

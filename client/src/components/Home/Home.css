@@ -1,0 +1,48 @@
+.home-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-gap: 10px;
+}
+
+.card {
+    display: flex;
+    background-color: #fff;
+}
+
+.card-image {
+    height: 200px;
+}
+
+.card-image > img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    margin-left: 5px;
+}
+
+.card-body > .kode-barang {
+    display: none;
+}
+
+.card-body > .stok {
+    flex-grow: 1;
+}
+
+.card-body > p:last-child {
+    display: flex;
+    align-items: center;
+    color: white;
+    background-color: var(--color-highlight);
+    cursor: pointer;
+}
+
+.card-body > p > * {
+    margin-right: 5px;
+    font-size: larger;
+}

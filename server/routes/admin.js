@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const db = require("../db");
 const cors = require("cors");
 const multer = require("multer");
+const fs = require("fs");
 require("dotenv").config();
 
 router.use(
@@ -262,6 +263,11 @@ router.delete("/goods/:id", (req, res) => {
         if (err) console.log(err);
         else {
             if (result.affectedRows === 1) {
+                const path = "./images/goods/";
+                let regex = new RegExp(id + "-");
+                fs.readdirSync(path)
+                    .filter((f) => regex.test(f))
+                    .map((f) => fs.unlinkSync(path + f));
                 res.status(202).send({ message: "Barang Deleted" });
             } else {
                 res.status(200).send({ message: "Barang with that kode_barang is not found" });

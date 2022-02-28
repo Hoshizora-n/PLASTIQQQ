@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./App.css";
 import Login from "./components/Login/login";
 import Loading from "./components/Loading/Loading";
+import Header from "./components/Header/Header";
+import Home from "./components/Home/Home";
+import Profile from "./components/Profile/Profile";
+import Checkout from "./components/Checkout/Checkout";
 
 const GetToken = () => {
     if (!localStorage.getItem("token")) return <Login />;
@@ -16,7 +20,7 @@ const TokenValidation = () => {
     let navigate = useNavigate();
 
     useEffect(() => {
-        let route = ["/home", "/profile", "checkout"];
+        let route = ["/home", "/profile", "/checkout"];
         if (!route.includes(window.location.pathname)) navigate("/home");
         setTimeout(() => {
             axios
@@ -38,10 +42,19 @@ const TokenValidation = () => {
     else return <Login />;
 };
 
-function App() {
+function App(props) {
+    const [cart, setCart] = useState([]);
+
     return (
         <div className="App">
-            <h3>Yo</h3>
+            <Header />
+            <main>
+                <Routes>
+                    <Route path="/home" element={<Home username={props.username} setCart={setCart} />} />
+                    <Route path="/profile" element={<Profile username={props.username} />} />
+                    <Route path="/checkout" element={<Checkout cart={cart} />} />
+                </Routes>
+            </main>
         </div>
     );
 }

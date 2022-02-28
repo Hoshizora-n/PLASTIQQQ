@@ -12,10 +12,6 @@ router.use(
     })
 );
 
-router.get("/", (req, res) => {
-    res.send("Login Page");
-});
-
 router.post("/login", (req, res) => {
     const { username, password } = req.body;
     db.query("SELECT * FROM `users` WHERE username = ?", [username], function (err, result) {
@@ -66,6 +62,94 @@ router.post("/checkToken", (req, res) => {
             }
         }
     );
+});
+
+router.post("/editprofile", (req, res) => {
+    const { username, editedUsername, password, editedPassword } = req.body.data;
+    if (editedPassword !== "") {
+        db.query(
+            "UPDATE `users` SET username = ?, password = ? WHERE username = ? AND password = ?",
+            [editedUsername, editedPassword, username, password],
+            (err, result) => {
+                try {
+                    if (err) throw err;
+                    else {
+                        const data = result.affectedRows;
+                        if (data === 1) {
+                            const token = createJwt(editedUsername, editedPassword);
+                            if (editedUsername === username) {
+                                res.status(201).send({
+                                    message: "Password Changed",
+                                    token: token,
+                                });
+                            } else {
+                                res.status(201).send({
+                                    message: "Username and Password Changed",
+                                    token: token,
+                                });
+                            }
+                        } else {
+                            res.status(200).send({
+                                message:
+                                    "Username and Password not Changed, make sure you enter the password correctly",
+                            });
+                        }
+                    }
+                } catch (error) {
+                    console.log(error);
+                    res.status(200).send({
+                        message: "Username Exist, Username and password not changed",
+                    });
+                }
+            }
+        );
+    } else {
+        db.query(
+            "UPDATE `users` SET username = ? WHERE username = ? AND password = ?",
+            [editedUsername, username, password],
+            (err, result) => {
+                try {
+                    if (err) throw err;
+                    else {
+                        const data = result.affectedRows;
+                        if (data === 1) {
+                            const token = createJwt(editedUsername, password);
+                            res.status(201).send({
+                                message: "Username Changed",
+                                token: token,
+                            });
+                        } else {
+                            res.status(200).send({
+                                message: "Username not Changed, make sure you enter the password correctly ",
+                            });
+                        }
+                    }
+                } catch (error) {
+                    console.log(error);
+                    res.status(200).send({ message: "Username Exist, Username not changed" });
+                }
+            }
+        );
+    }
+});
+
+router.get("/home", (req, res) => {
+    db.query("SELECT * FROM `barang` ORDER BY `barang`.`id_barang` ASC", (err, result) => {
+        if (err) throw err;
+        else {
+            res.status(200).send(result);
+        }
+    });
+});
+
+router.get("/cart/:id", (req, res) => {
+    const { id } = req.params;
+    db.query("SELECT * FROM `barang` WHERE kode_barang = ?", [id], (err, result) => {
+        if (err) throw err;
+        else {
+            res.status(200).send(result);
+        }
+    });
 });
 
 const createJwt = (username, password) => {

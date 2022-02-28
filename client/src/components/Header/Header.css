@@ -1,0 +1,32 @@
+.header-container {
+    display: flex;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    padding: 0 5px;
+    background-color: var(--color-highlight);
+}
+
+.header-container > :first-child {
+    flex-grow: 1;
+}
+
+.header-container > a {
+    padding: 5px;
+    padding-right: 15px;
+    background-color: var(--color-bg);
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    color: black;
+}
+
+.header-container > a.active {
+    color: var(--color-highlight);
+}
+
+/* @media screen and (max-width: 700px) {
+    .header-container > a {
+        padding-right: 15px;
+    }
+} */

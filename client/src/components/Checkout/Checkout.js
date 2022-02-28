@@ -78,11 +78,13 @@ const Checkout = (props) => {
             const kode_barang = cartItems[i].id;
             const quantity_barang = cartInfo.getElementsByTagName("input")[0].value;
             const total_harga = cartTotal.getElementsByTagName("p")[0].getAttribute("total");
+            const updated_stok = cartInfo.getElementsByTagName("input")[0].getAttribute("max");
 
             const data = {
                 kode_barang: kode_barang,
                 quantity: quantity_barang,
                 total_harga: total_harga,
+                updated_stok: updated_stok - quantity_barang,
             };
 
             checkoutItems.push(data);
@@ -92,6 +94,8 @@ const Checkout = (props) => {
             username: props.username,
             checkoutItems: checkoutItems,
         };
+
+        console.log(data);
 
         axios
             .post(`http://${process.env.REACT_APP_BASE_URL}:3100/user/checkout`, data)

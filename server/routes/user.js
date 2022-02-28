@@ -178,6 +178,16 @@ router.post("/checkout", (req, res) => {
                 }
             }
         );
+        db.query(
+            "UPDATE `barang` SET stok = ? WHERE kode_barang = ?",
+            [checkoutItems[i].updated_stok, checkoutItems[i].kode_barang],
+            (err, result) => {
+                if (err) throw err;
+                else {
+                    console.log(result.affectedRows);
+                }
+            }
+        );
     }
 
     db.query(

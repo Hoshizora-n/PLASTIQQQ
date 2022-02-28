@@ -23,6 +23,8 @@ const Home = (props) => {
             if (prevState.includes(id)) return prevState;
             else return [...prevState, id];
         });
+
+        localStorage.setItem("cart", JSON.stringify(props.cart));
     };
 
     return (

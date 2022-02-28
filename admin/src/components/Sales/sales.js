@@ -3,7 +3,7 @@ import "./sales.css";
 
 function Sales() {
     return (
-        <div>
+        <div className="sales-container">
             <h1>This is Sales Page</h1>
         </div>
     );

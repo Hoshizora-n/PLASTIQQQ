@@ -75,6 +75,16 @@ const Profile = (props) => {
                     </button>
                 </form>
             </div>
+            <div className="logout">
+                <button
+                    onClick={() => {
+                        localStorage.removeItem("token");
+                        window.location.reload();
+                    }}
+                >
+                    Logout
+                </button>
+            </div>
         </div>
     );
 };

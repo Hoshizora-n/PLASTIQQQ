@@ -1,8 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Checkout.css";
 
 const Checkout = (props) => {
+    let navigate = useNavigate();
     const [item, setItem] = useState([]);
     const [total, setTotal] = useState({
         0: 0,
@@ -30,6 +32,16 @@ const Checkout = (props) => {
     const subTotal = total[0] + total[1] + total[2] + total[3] + total[4] + total[5] + total[6] + total[7] + total[8];
 
     useEffect(() => {
+        const checkoutItems = document.querySelector(".checkout-items");
+        let condition = true;
+        while (condition) {
+            if (checkoutItems.firstChild) {
+                checkoutItems.removeChild(checkoutItems.firstChild);
+            } else {
+                condition = false;
+            }
+        }
+
         for (let i = 0; i < props.cart.length; i++) {
             axios
                 .get(`http://${process.env.REACT_APP_BASE_URL}:3100/user/cart/${props.cart[i]}`)
@@ -39,7 +51,7 @@ const Checkout = (props) => {
                 .catch((err) => console.log(err));
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [props.cart]);
 
     const handleCheckout = (e) => {
         e.preventDefault();
@@ -72,9 +84,20 @@ const Checkout = (props) => {
         axios
             .post(`http://${process.env.REACT_APP_BASE_URL}:3100/user/checkout`, data)
             .then((res) => {
-                console.log(res.data.message);
+                if (res.data.message === "Checkout Success") {
+                    props.setCart([]);
+                    navigate("/home");
+                } else {
+                    console.log(res);
+                }
             })
             .catch((err) => console.log(err));
+    };
+
+    const handleDeleteCart = (e) => {
+        e.preventDefault();
+        const kode_barang = e.target.parentElement.parentElement.id;
+        props.setCart((prevState) => prevState.filter((item) => item !== kode_barang));
     };
 
     return (
@@ -98,7 +121,7 @@ const Checkout = (props) => {
                                     type="number"
                                     name="quantity"
                                     id="quantity"
-                                    min="0"
+                                    min="1"
                                     value={quantity[index]}
                                     onChange={(e) => {
                                         setQuantity((prevState) => {
@@ -118,6 +141,9 @@ const Checkout = (props) => {
                                 />
                             </div>
                             <div className="checkout-item-total">
+                                <button className="delete-cart-item" onClick={handleDeleteCart}>
+                                    Delete
+                                </button>
                                 <p total={total[index]}>Total : Rp. {total[index]}</p>
                             </div>
                         </div>
@@ -129,6 +155,7 @@ const Checkout = (props) => {
                 <h3>Rp. {subTotal}</h3>
             </div>
             <div className="checkout-button">
+                <button className="update">Update</button>
                 <button className="checkout" onClick={handleCheckout}>
                     Checkout
                 </button>

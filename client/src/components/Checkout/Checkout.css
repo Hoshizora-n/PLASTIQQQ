@@ -21,7 +21,24 @@
 .checkout-item > .checkout-item-total {
     flex-grow: 1;
     display: flex;
-    justify-content: end;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.checkout-item > .checkout-item-total > .delete-cart-item {
+    border: none;
+    border: 1px solid #d9534f;
+    color: #d9534f;
+    transition: all 0.2s ease-in-out;
+    padding: 5px;
+    border-radius: 2px;
+    background-color: transparent;
+}
+
+.checkout-item > .checkout-item-total > .delete-cart-item:hover {
+    background-color: #d9534f;
+    color: #fff;
 }
 
 .checkout-subtotal {
@@ -31,14 +48,33 @@
 
 .checkout-button {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
 }
 
-button.checkout {
+.checkout-button > .update {
+    border: none;
+    border: 1px solid var(--color-highlight);
+    margin-right: 5px;
+    color: var(--color-highlight);
+    transition: all 0.2s ease-in-out;
+    padding: 5px;
+    font-size: 20px;
+    border-radius: 2px;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.checkout-button > .update:hover {
+    background-color: var(--color-highlight);
+    color: white;
+}
+
+.checkout-button > button.checkout {
     border: none;
     cursor: pointer;
     background-color: var(--color-highlight);
     font-size: 20px;
     padding: 5px;
+    border-radius: 2px;
     color: white;
 }

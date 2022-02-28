@@ -50,9 +50,12 @@ function App(props) {
             <Header />
             <main>
                 <Routes>
-                    <Route path="/home" element={<Home username={props.username} setCart={setCart} />} />
+                    <Route path="/home" element={<Home cart={cart} username={props.username} setCart={setCart} />} />
                     <Route path="/profile" element={<Profile username={props.username} />} />
-                    <Route path="/checkout" element={<Checkout cart={cart} username={props.username} />} />
+                    <Route
+                        path="/checkout"
+                        element={<Checkout cart={cart} username={props.username} setCart={setCart} />}
+                    />
                 </Routes>
             </main>
         </div>

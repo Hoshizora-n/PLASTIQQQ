@@ -117,7 +117,7 @@ const Checkout = (props) => {
             <h1>Checkout</h1>
             <div className="checkout-items">
                 {item.map((item, index) => {
-                    const { foto_barang, nama_barang, harga_barang, kode_barang } = item[0];
+                    const { foto_barang, nama_barang, harga_barang, kode_barang, stok } = item[0];
                     return (
                         <div className="checkout-item" key={index} id={kode_barang}>
                             <div className="checkout-item-img">
@@ -134,6 +134,7 @@ const Checkout = (props) => {
                                     name="quantity"
                                     id="quantity"
                                     min="1"
+                                    max={stok}
                                     value={quantity[index]}
                                     onChange={(e) => {
                                         setQuantity((prevState) => {

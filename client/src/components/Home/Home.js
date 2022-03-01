@@ -30,7 +30,6 @@ const Home = (props) => {
     return (
         <>
             <h2>Welcome, {props.username}</h2>
-            <h3>Here is the Home Page</h3>
             <div className="home-container">
                 {goods.map((good) => {
                     const filePath = `http://${process.env.REACT_APP_BASE_URL}:3100/${good.foto_barang}`;

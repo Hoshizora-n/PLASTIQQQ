@@ -24,7 +24,7 @@ function Dashboard() {
                     <FiUser className="icon" />
                     <h2>{dashboard.totalAdmin}</h2>
                 </div>
-                <div className="total-kasir">
+                <div className="total-users">
                     <h2>Kasir</h2>
                     <FiUser className="icon" />
                     <h2>{dashboard.totalUsers}</h2>

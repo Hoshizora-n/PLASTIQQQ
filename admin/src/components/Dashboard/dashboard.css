@@ -13,7 +13,19 @@
 }
 
 .dashboard-summary > .total-admin {
-    background-color: var(--color-highlight);
+    background-color: #007090;
+}
+
+.dashboard-summary > .total-users {
+    background-color: #007090;
+}
+
+.dashboard-summary > .total-barang {
+    background-color: #01a7c2;
+}
+
+.dashboard-summary > .total-penjualan {
+    background-color: #01a7c2;
 }
 
 .dashboard-container .icon {

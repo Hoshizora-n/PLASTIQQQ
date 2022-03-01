@@ -1,9 +1,9 @@
-div > .users-page-nav {
+.users-page-container > .users-page-nav {
     display: flex;
     margin: 10px 0;
 }
 
-div > .users-page-nav > * {
+.users-page-container > .users-page-nav > * {
     padding: 5px;
     text-decoration: none;
     color: black;
@@ -13,29 +13,29 @@ div > .users-page-nav > * {
     font-size: 16px;
 }
 
-div > .users-page-nav > *:hover {
+.users-page-container > .users-page-nav > *:hover {
     background-color: var(--color-highlight);
     color: white;
 }
 
-div > .users-page-nav > *.active {
+.users-page-container > .users-page-nav > *.active {
     background-color: var(--color-highlight);
     color: white;
 }
 
-table {
+.users-page-container > table {
     width: 100%;
 }
 
-table > thead > tr > :first-child {
+.users-page-container > table > thead > tr > :first-child {
     width: 40px;
 }
 
-table > tbody > tr > :first-child {
+.users-page-container > table > tbody > tr > :first-child {
     text-align: center;
 }
 
-td {
+.users-page-container > table td {
     border: 1px solid #bbb;
 }
 

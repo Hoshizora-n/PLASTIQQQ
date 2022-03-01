@@ -1,0 +1,28 @@
+.detail-sales-item > .barang-container > .barang-item {
+    display: flex;
+}
+
+.detail-sales-item > .barang-container > .barang-item img {
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+}
+
+.barang-item-info {
+    display: flex;
+    flex-grow: 1;
+}
+
+.barang-item-info > .barang-item-detail {
+    margin-left: 5px;
+    flex-grow: 1;
+}
+
+.barang-item-info > .barang-item-qty {
+    text-align: center;
+}
+
+.barang-item-info > .barang-item-total {
+    margin-right: 5px;
+    margin-left: 15px;
+}

@@ -1,0 +1,18 @@
+.sales-container table {
+    width: 100%;
+}
+
+.sales-container table > tbody > tr > :first-child {
+    width: 40px;
+    text-align: center;
+}
+
+.sales-container table > tbody > tr > td {
+    border: 1px solid var(--color-highlight);
+}
+
+.sales-container table > tbody > tr:hover {
+    cursor: pointer;
+    color: white;
+    background-color: var(--color-highlight);
+}

@@ -40,7 +40,7 @@ function UsersPage(props) {
     };
 
     return (
-        <div>
+        <div className="users-page-container">
             <div className="users-page-nav">
                 <Link to="/users/admin" className={id === "admin" ? "active" : ""}>
                     Admin

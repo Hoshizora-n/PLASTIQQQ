@@ -15,6 +15,7 @@ import AddUser from "./components/UsersPage/AddUser/AddUser";
 import AddAdmin from "./components/UsersPage/AddAdmin/AddAdmin";
 import AddGoods from "./components/Goods/AddGoods/AddGoods";
 import EditGoods from "./components/Goods/EditGoods/EditGoods";
+import DetailSales from "./components/Sales/DetailedSales/DetailSales";
 
 const GetToken = () => {
     if (!localStorage.getItem("token")) return <Login />;
@@ -62,6 +63,7 @@ const TokenValidation = () => {
 
 const App = (props) => {
     const [isHeaderOpen, setIsHeaderOpen] = useState(false);
+    const [fakturClickedData, setFakturClickedData] = useState({});
     return (
         <div className="App">
             <Sidebar isHeaderOpen={isHeaderOpen} />
@@ -72,7 +74,8 @@ const App = (props) => {
                     <Route path="/goods" element={<Goods />} />
                     <Route path="/goods/add-new-goods" element={<AddGoods />} />
                     <Route path="/goods/edit" element={<EditGoods />} />
-                    <Route path="/sales" element={<Sales />} />
+                    <Route path="/sales" element={<Sales setFakturClickedData={setFakturClickedData} />} />
+                    <Route path="/sales/:id" element={<DetailSales fakturClickedData={fakturClickedData} />} />
                     <Route path="/users/:id" element={<UsersPage username={props.username} />} />
                     <Route path="/users/add-new-user" element={<AddUser />} />
                     <Route path="/users/add-new-admin" element={<AddAdmin />} />

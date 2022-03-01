@@ -316,6 +316,33 @@ router.put("/goods/:id", (req, res) => {
 });
 // end Goods API
 
+// Sales API
+
+router.get("/sales", (req, res) => {
+    db.query("SELECT * FROM `faktur_pembelian` ORDER BY `faktur_pembelian`.`kode_faktur` ASC", (err, result) => {
+        if (err) throw err;
+        else {
+            res.status(200).send(result);
+        }
+    });
+});
+
+router.get("/sales/:id", (req, res) => {
+    const id = req.params.id;
+    db.query(
+        "SELECT pembelian.*, barang.foto_barang, barang.nama_barang, barang.harga_barang FROM `pembelian` INNER JOIN `barang` ON pembelian.kode_barang = barang.kode_barang WHERE kode_faktur = ?",
+        [id],
+        (err, result) => {
+            if (err) throw err;
+            else {
+                res.status(200).send(result);
+            }
+        }
+    );
+});
+
+// end Sales API
+
 const createJwt = (username, password) => {
     let token = jwt.sign({ username, password }, "secret");
     return token;

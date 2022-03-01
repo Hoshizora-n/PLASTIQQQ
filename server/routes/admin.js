@@ -341,6 +341,20 @@ router.get("/sales/:id", (req, res) => {
     );
 });
 
+router.delete("/sales/:id", (req, res) => {
+    const { id } = req.params;
+    db.query("DELETE FROM `faktur_pembelian` WHERE kode_faktur = ?", [id], (err, result) => {
+        if (err) console.log(err);
+        else {
+            if (result.affectedRows === 1) {
+                res.status(202).send({ message: "Deleted" });
+            } else {
+                res.status(200).send({ message: "Sales with that id is not found" });
+            }
+        }
+    });
+});
+
 // end Sales API
 
 const createJwt = (username, password) => {

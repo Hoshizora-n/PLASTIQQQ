@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./DetailSales.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
 const DetailSales = (props) => {
+    let navigate = useNavigate();
     let { id } = useParams();
     const [barang, setBarang] = useState([]);
 
@@ -53,6 +55,24 @@ const DetailSales = (props) => {
                 </div>
                 <h3 className="subtotal">Subtotal : Rp. {props.fakturClickedData.subTotal}</h3>
                 <h3 className="tanggal">Tanggal : {props.fakturClickedData.tanggal}</h3>
+                <div className="detail-sales-action">
+                    <button className="back" onClick={() => navigate("/sales")}>
+                        Back
+                    </button>
+                    <button
+                        className="delete"
+                        onClick={() => {
+                            axios
+                                .delete(`http://${process.env.REACT_APP_BASE_URL}:3100/admin/sales/${id}`)
+                                .then((res) => {
+                                    if (res.data.message === "Deleted") navigate("/sales");
+                                })
+                                .catch((err) => console.log(err));
+                        }}
+                    >
+                        Delete
+                    </button>
+                </div>
             </div>
         </div>
     );

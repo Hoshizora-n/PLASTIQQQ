@@ -26,3 +26,35 @@
     margin-right: 5px;
     margin-left: 15px;
 }
+
+.detail-sales-action {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.detail-sales-action > .back {
+    border: none;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background-color: var(--color-highlight);
+    cursor: pointer;
+    border-radius: 2px;
+    margin-right: 5px;
+}
+
+.detail-sales-action > .delete {
+    border: none;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #d9534f;
+    color: white;
+    cursor: pointer;
+    border-radius: 2px;
+    margin-right: 5px;
+}

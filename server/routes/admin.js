@@ -219,11 +219,11 @@ const goodsStorage = multer.diskStorage({
 
 // Goods API
 const uploadGoodsFilter = (req, file, cb) => {
+    if (fs.existsSync("./images/goods/" + req.body.kodeBarang + "-" + file.originalname)) cb(null, false);
     if (file.mimetype === "image/jpeg" || file.mimetype === "image/png" || file.mimetype === "image/jpg") {
         cb(null, true);
     } else {
-        if (fs.existsSync("./images/goods/" + req.body.kodeBarang + "-" + file.originalname)) cb(null, false);
-        else cb(new Error("insert png/jpg/jpeg file"), false);
+        cb(new Error("insert png/jpg/jpeg file"), false);
     }
 };
 const uploadGoods = multer({

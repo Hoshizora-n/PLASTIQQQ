@@ -12,13 +12,16 @@
 }
 
 .header-container > a {
-    padding: 5px;
-    padding-right: 15px;
+    padding: 10px;
     background-color: var(--color-bg);
     display: flex;
     align-items: center;
     font-size: 20px;
     color: black;
+}
+
+.header-container > a:last-child {
+    margin-right: 10px;
 }
 
 .header-container > a.active {

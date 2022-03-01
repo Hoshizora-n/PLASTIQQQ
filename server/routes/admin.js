@@ -222,7 +222,8 @@ const uploadGoodsFilter = (req, file, cb) => {
     if (file.mimetype === "image/jpeg" || file.mimetype === "image/png" || file.mimetype === "image/jpg") {
         cb(null, true);
     } else {
-        cb(new Error("insert png/jpg/jpeg file"), false);
+        if (fs.existsSync("./images/goods/" + req.body.kodeBarang + "-" + file.originalname)) cb(null, false);
+        else cb(new Error("insert png/jpg/jpeg file"), false);
     }
 };
 const uploadGoods = multer({

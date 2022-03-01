@@ -343,6 +343,17 @@ router.get("/sales/:id", (req, res) => {
 
 router.delete("/sales/:id", (req, res) => {
     const { id } = req.params;
+    db.query("DELETE FROM `pembelian` WHERE kode_faktur = ?", [id], (err, result) => {
+        if (err) console.log(err);
+        else {
+            if (result.affectedRows >= 1) {
+                console.log("Delete Success");
+            } else {
+                res.status(200).send({ message: "Sales with that kode_faktur is not found" });
+            }
+        }
+    });
+
     db.query("DELETE FROM `faktur_pembelian` WHERE kode_faktur = ?", [id], (err, result) => {
         if (err) console.log(err);
         else {

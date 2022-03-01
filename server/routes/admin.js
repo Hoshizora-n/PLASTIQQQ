@@ -134,6 +134,43 @@ router.post("/editprofile", (req, res) => {
     }
 });
 
+router.get("/dashboard", (req, res) => {
+    let totalAdmin;
+    let totalUsers;
+    let totalBarang;
+    let totalPenjualan;
+    db.query("SELECT COUNT(*) AS totalAdmin FROM `admin`", (err, result) => {
+        if (err) throw err;
+        else {
+            totalAdmin = result[0].totalAdmin;
+            db.query("SELECT COUNT(*) AS totalUsers FROM `users`", (err, result) => {
+                if (err) throw err;
+                else {
+                    totalUsers = result[0].totalUsers;
+                    db.query("SELECT COUNT(*) AS totalBarang FROM `barang`", (err, result) => {
+                        if (err) throw err;
+                        else {
+                            totalBarang = result[0].totalBarang;
+                            db.query("SELECT COUNT(*) AS totalPenjualan FROM `faktur_pembelian`", (err, result) => {
+                                if (err) throw err;
+                                else {
+                                    totalPenjualan = result[0].totalPenjualan;
+                                    res.status(200).send({
+                                        totalAdmin,
+                                        totalUsers,
+                                        totalBarang,
+                                        totalPenjualan,
+                                    });
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        }
+    });
+});
+
 router.get("/admin", (req, res) => {
     db.query("SELECT username, admin_id FROM `admin` ORDER BY `admin_id` ASC", (err, result) => {
         if (err) throw err;

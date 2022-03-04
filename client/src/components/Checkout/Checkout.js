@@ -80,6 +80,13 @@ const Checkout = (props) => {
             const total_harga = cartTotal.getElementsByTagName("p")[0].getAttribute("total");
             const updated_stok = cartInfo.getElementsByTagName("input")[0].getAttribute("max");
 
+            if (quantity_barang === "0" || quantity_barang === "") {
+                alert("quantity cannot be 0 or empty");
+                return (checkoutItems = null);
+            }
+
+            if (checkoutItems === null) break;
+
             const data = {
                 kode_barang: kode_barang,
                 quantity: quantity_barang,
@@ -95,10 +102,13 @@ const Checkout = (props) => {
             checkoutItems: checkoutItems,
         };
 
+        if (checkoutItems === null) return;
+
         axios
             .post(`http://${process.env.REACT_APP_BASE_URL}:3100/user/checkout`, data)
             .then((res) => {
                 if (res.data.message === "Checkout Success") {
+                    alert("Checkout Success");
                     props.setCart([]);
                     navigate("/home");
                 } else {

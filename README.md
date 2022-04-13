@@ -1,6 +1,7 @@
 # PLASTIQQQ
 
 Plastiqqq adalah software kasir untuk warung plastik yang dibuat dengan teknologi React.JS, Express.JS, dan MySQL dengan tujuan utama saya untuk mengikuti Uji Kompetensi Keahlian di sekolah.
+First Commit 6 Feb 2022.
 
 ## Instalasi
 

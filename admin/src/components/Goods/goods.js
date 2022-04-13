@@ -3,10 +3,23 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 import "./goods.css";
 
 function Goods() {
     const [goods, setGoods] = useState([]);
+
+    const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener("mouseenter", Swal.stopTimer);
+            toast.addEventListener("mouseleave", Swal.resumeTimer);
+        },
+    });
 
     useEffect(() => {
         axios
@@ -33,10 +46,16 @@ function Goods() {
             .delete(`http://${process.env.REACT_APP_BASE_URL}:3100/admin/goods/${id}`)
             .then((res) => {
                 if (res.data.message === "Barang Deleted") {
-                    alert(res.data.message);
+                    Toast.fire({
+                        icon: "success",
+                        title: "Barang Deleted",
+                    });
                     window.location.reload();
                 } else {
-                    alert(res.data.message);
+                    Toast.fire({
+                        icon: "error",
+                        title: res.data.message,
+                    });
                 }
             })
             .catch((err) => console.log(err));

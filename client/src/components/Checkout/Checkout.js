@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import "./Checkout.css";
 
 const Checkout = (props) => {
@@ -30,6 +31,18 @@ const Checkout = (props) => {
     });
 
     const subTotal = total[0] + total[1] + total[2] + total[3] + total[4] + total[5] + total[6] + total[7] + total[8];
+
+    const Toast = Swal.mixin({
+        toast: true,
+        position: "top-start",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener("mouseenter", Swal.stopTimer);
+            toast.addEventListener("mouseleave", Swal.resumeTimer);
+        },
+    });
 
     useEffect(() => {
         const checkoutItems = document.querySelector(".checkout-items");
@@ -81,7 +94,10 @@ const Checkout = (props) => {
             const updated_stok = cartInfo.getElementsByTagName("input")[0].getAttribute("max");
 
             if (quantity_barang === "0" || quantity_barang === "") {
-                alert("quantity cannot be 0 or empty");
+                Toast.fire({
+                    icon: "error",
+                    title: "Quantity cannot be 0",
+                });
                 return (checkoutItems = null);
             }
 
@@ -108,7 +124,10 @@ const Checkout = (props) => {
             .post(`http://${process.env.REACT_APP_BASE_URL}:3100/user/checkout`, data)
             .then((res) => {
                 if (res.data.message === "Checkout Success") {
-                    alert("Checkout Success");
+                    Toast.fire({
+                        icon: "success",
+                        title: "Checkout Success",
+                    });
                     props.setCart([]);
                     navigate("/home");
                 } else {
@@ -165,11 +184,9 @@ const Checkout = (props) => {
                                     onClick={(e) => {
                                         e.preventDefault();
                                         props.setCart((prevState) => prevState.filter((item) => item !== kode_barang));
-                                        setTotal((prevState) => {
-                                            return {
-                                                ...prevState,
-                                                [index]: 0,
-                                            };
+                                        Toast.fire({
+                                            icon: "success",
+                                            title: "Item removed from cart",
                                         });
                                     }}
                                 >

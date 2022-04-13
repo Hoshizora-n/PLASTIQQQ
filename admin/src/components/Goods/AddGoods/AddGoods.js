@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./AddGoods.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const AddGoods = () => {
     let navigate = useNavigate();
@@ -15,6 +16,18 @@ const AddGoods = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener("mouseenter", Swal.stopTimer);
+                toast.addEventListener("mouseleave", Swal.resumeTimer);
+            },
+        });
 
         const allData = [kodeBarang, namaBarang, hargaBarang, stok, deskripsi];
         const check = allData.every((data) => data !== "");
@@ -32,15 +45,31 @@ const AddGoods = () => {
                 .post(`http://${process.env.REACT_APP_BASE_URL}:3100/admin/goods`, data)
                 .then((res) => {
                     if (res.data.message === "Barang Created") {
-                        alert(res.data.message);
+                        Toast.fire({
+                            icon: "success",
+                            title: "Barang Created",
+                        });
                         navigate("/goods");
-                    } else alert(res.data.message + " " + res.data.err);
+                    } else {
+                        Toast.fire({
+                            icon: "error",
+                            title: res.data.message + " " + res.data.err,
+                        });
+                    }
                 })
                 .catch((error) => {
                     const { response } = error;
-                    alert(response.statusText);
+                    Toast.fire({
+                        icon: "error",
+                        title: response.statusText,
+                    });
                 });
-        } else alert("All field must be filled");
+        } else {
+            Toast.fire({
+                icon: "error",
+                title: "Please fill all the data",
+            });
+        }
     };
     return (
         <div className="add-goods">

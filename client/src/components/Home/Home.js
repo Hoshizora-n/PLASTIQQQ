@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 import { FiShoppingCart } from "react-icons/fi";
 import "./Home.css";
 
@@ -17,11 +18,34 @@ const Home = (props) => {
             .catch((err) => console.log(err));
     }, []);
 
+    const Toast = Swal.mixin({
+        toast: true,
+        position: "top-start",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener("mouseenter", Swal.stopTimer);
+            toast.addEventListener("mouseleave", Swal.resumeTimer);
+        },
+    });
+
     const addToCart = (e) => {
         const { id } = e.target;
         props.setCart((prevState) => {
-            if (prevState.includes(id)) return prevState;
-            else return [...prevState, id];
+            if (prevState.includes(id)) {
+                Toast.fire({
+                    icon: "error",
+                    title: "Item already in cart",
+                });
+                return prevState;
+            } else {
+                Toast.fire({
+                    icon: "success",
+                    title: "Added to cart",
+                });
+                return [...prevState, id];
+            }
         });
 
         localStorage.setItem("cart", JSON.stringify(props.cart));

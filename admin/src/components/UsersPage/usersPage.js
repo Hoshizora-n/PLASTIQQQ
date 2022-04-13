@@ -1,12 +1,25 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 import "./usersPage.css";
 
 function UsersPage(props) {
     let [users, setUsers] = useState([]);
     let [admin, setAdmin] = useState([]);
     let { id } = useParams();
+
+    const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener("mouseenter", Swal.stopTimer);
+            toast.addEventListener("mouseleave", Swal.resumeTimer);
+        },
+    });
 
     useEffect(() => {
         axios.get(`http://${process.env.REACT_APP_BASE_URL}:3100/admin/admin`).then((res) => {
@@ -30,10 +43,16 @@ function UsersPage(props) {
             .delete(`http://${process.env.REACT_APP_BASE_URL}:3100/admin/${role}/${id}`)
             .then((res) => {
                 if (res.data.message === "User Deleted" || res.data.message === "Admin Deleted") {
-                    alert(res.data.message);
+                    Toast.fire({
+                        icon: "success",
+                        title: res.data.message,
+                    });
                     window.location.reload();
                 } else {
-                    alert(res.data.message);
+                    Toast.fire({
+                        icon: "error",
+                        title: res.data.message,
+                    });
                 }
             })
             .catch((err) => console.log(err));

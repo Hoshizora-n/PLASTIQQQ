@@ -2,11 +2,24 @@ import React, { useState } from "react";
 import axios from "axios";
 import { FiUser } from "react-icons/fi";
 import "./Profile.css";
+import Swal from "sweetalert2";
 
 const Profile = (props) => {
     const [editUsername, setEditUsername] = useState(props.username);
     const [password, setPassword] = useState("");
     const [editPassword, setEditPassword] = useState("");
+
+    const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener("mouseenter", Swal.stopTimer);
+            toast.addEventListener("mouseleave", Swal.resumeTimer);
+        },
+    });
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -23,10 +36,18 @@ const Profile = (props) => {
             })
             .then((res) => {
                 if (res.status === 201) {
-                    alert(res.data.message);
                     localStorage.setItem("token", res.data.token);
+                    Toast.fire({
+                        icon: "success",
+                        title: res.data.message,
+                    });
                     window.location.reload();
-                } else alert(res.data.message);
+                } else {
+                    Toast.fire({
+                        icon: "error",
+                        title: res.data.message,
+                    });
+                }
             });
     };
     return (

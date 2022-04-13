@@ -2,11 +2,24 @@ import React, { useState } from "react";
 import axios from "axios";
 import "../add.css";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const AddUser = () => {
     let navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+
+    const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener("mouseenter", Swal.stopTimer);
+            toast.addEventListener("mouseleave", Swal.resumeTimer);
+        },
+    });
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -22,9 +35,17 @@ const AddUser = () => {
             })
             .then((res) => {
                 if (res.status === 201) {
-                    alert(res.data.message);
+                    Toast.fire({
+                        icon: "success",
+                        title: res.data.message,
+                    });
                     navigate("/users/users");
-                } else alert(res.data.message);
+                } else {
+                    Toast.fire({
+                        icon: "error",
+                        title: res.data.message,
+                    });
+                }
             });
     };
     return (

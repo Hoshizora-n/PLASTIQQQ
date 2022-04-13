@@ -1,10 +1,23 @@
 import React, { useState } from "react";
 import "./login.css";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const Login = () => {
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
+
+    const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener("mouseenter", Swal.stopTimer);
+            toast.addEventListener("mouseleave", Swal.resumeTimer);
+        },
+    });
 
     const handleUsernameChange = (e) => {
         setUsername(e.target.value);
@@ -28,7 +41,10 @@ const Login = () => {
                     localStorage.setItem("token", res.data.token);
                     window.location.href = "/";
                 } else {
-                    alert(res.data.message);
+                    Toast.fire({
+                        icon: "error",
+                        title: res.data.message,
+                    });
                 }
             })
             .catch((err) => {

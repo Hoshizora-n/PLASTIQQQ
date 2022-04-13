@@ -3,11 +3,24 @@ import "./DetailSales.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const DetailSales = (props) => {
     let navigate = useNavigate();
     let { id } = useParams();
     const [barang, setBarang] = useState([]);
+
+    const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener("mouseenter", Swal.stopTimer);
+            toast.addEventListener("mouseleave", Swal.resumeTimer);
+        },
+    });
 
     useEffect(() => {
         axios
@@ -65,7 +78,13 @@ const DetailSales = (props) => {
                             axios
                                 .delete(`http://${process.env.REACT_APP_BASE_URL}:3100/admin/sales/${id}`)
                                 .then((res) => {
-                                    if (res.data.message === "Deleted") navigate("/sales");
+                                    if (res.data.message === "Deleted") {
+                                        Toast.fire({
+                                            icon: "success",
+                                            title: `${id} ${res.data.message}`,
+                                        });
+                                        navigate("/sales");
+                                    }
                                 })
                                 .catch((err) => console.log(err));
                         }}

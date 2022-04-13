@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import "./EditGoods.css";
 
 const EditGoods = () => {
@@ -8,6 +9,18 @@ const EditGoods = () => {
     const [hargaBarang, setHargaBarang] = useState("");
     const [stok, setStok] = useState("");
     const [deskripsi, setDeskripsi] = useState("");
+
+    const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener("mouseenter", Swal.stopTimer);
+            toast.addEventListener("mouseleave", Swal.resumeTimer);
+        },
+    });
 
     useEffect(() => {
         const getData = async () => {
@@ -32,10 +45,16 @@ const EditGoods = () => {
             .put(`http://${process.env.REACT_APP_BASE_URL}:3100/admin/goods/${id}`, data)
             .then((res) => {
                 if (res.data.message === "Barang Updated") {
-                    alert(res.data.message);
+                    Toast.fire({
+                        icon: "success",
+                        title: "Barang Updated",
+                    });
                     navigate("/goods");
                 } else {
-                    alert(res.data.message);
+                    Toast.fire({
+                        icon: "error",
+                        title: res.data.message,
+                    });
                 }
             })
             .catch((err) => console.log(err));

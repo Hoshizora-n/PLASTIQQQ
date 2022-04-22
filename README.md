@@ -11,7 +11,7 @@ Web Admin
 3. Menambahkan admin atau kasir baru
 4. Mengelola akun (Mengganti username atau Password)
 
-Web Clients (Kasir)
+Web Client (Kasir)
 1. Melihat daftar barang
 2. Checkout barang / membuat faktur baru
 3. Mengelola akun (Mengganti username atau Password)
